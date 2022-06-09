@@ -26,10 +26,6 @@ nav{
     background-color: transparent;
 }
 
-.logo{ 
-
-}
-
 .nav-content{
     font-size: 25px;
     & a:not(:first-child){
@@ -57,4 +53,35 @@ nav{
 
 .icon{
     cursor: pointer;
+}
+
+//MEDIA
+
+@media (max-width: 1000px) {
+    .logo{
+        display: none;
+    }
+}
+
+@media (max-width: 426px) {
+    .nav-content{
+        font-size: 16px;
+        & a:not(:first-child){
+            margin-left: 50px;
+        }
+    }
+    .nav-wrapper{
+        padding: 0 20px;
+    }
+    .nav-icons{
+        img {
+            width: 20px;
+        }
+        & div:not(:first-child){
+            margin-left: 20px;
+        }
+    }
+    .nav-wrapper{
+        height: 80px;
+    }
 }

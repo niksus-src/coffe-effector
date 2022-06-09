@@ -29,7 +29,7 @@ const NavBar = () => {
                         <Link to="/contacts">Контакты</Link>
                     </div>
                 }
-                { isActiveBar && <Search/>}
+                { isActiveBar && <Search closeSearch={setIsActiveBar}/>}
                 <div className="nav-icons">
                     {
                         !isActiveBar && 
