@@ -1,0 +1,60 @@
+@import "../../style/config.scss";
+
+//NAVBAR
+
+$duration: .25s;
+
+nav{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color $duration ease-in, box-shadow .1s ease-in;
+}
+
+.nav_active{
+    background-color: #fff;
+    box-shadow: 0px 5px 20px rgba(157, 157, 157, 0.25);
+}
+
+.nav-wrapper{
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background-color: transparent;
+}
+
+.logo{ 
+
+}
+
+.nav-content{
+    font-size: 25px;
+    & a:not(:first-child){
+        margin-left: 100px;
+    }
+    a{
+        color: $text-color;
+        text-decoration: none;
+        transition: border-bottom .1s ease-in;
+        border-bottom: 0 solid $accent;
+    
+        &:hover{
+            border-bottom: 3px solid $accent;
+        }
+    }
+}
+
+.nav-icons{
+    display: flex;
+    align-items: center;
+    & div:not(:first-child){
+        margin-left: 50px;
+    }
+}
+
+.icon{
+    cursor: pointer;
+}

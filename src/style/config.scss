@@ -1,0 +1,28 @@
+//FONTS
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+    @font-face {
+        font-family: $font-family;
+        font-weight: $weight;
+        font-style: $style;
+        src: url(#{$file-path}) format('woff2');
+    }
+}
+
+@include font-face('Gilroy', '../fonts/gilroy-medium.woff2');
+
+//VARIABLES
+
+$accent: #F9B300;
+$accent-hover: #E2A300;
+$text-color: #000;
+$text-gray: #C6C6C6;
+
+//GLOBAL STYLE 
+body{
+    background-color: $text-gray;
+    height: 2000px;
+}
+
+input {
+    outline:none;
+}
