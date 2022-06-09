@@ -46,8 +46,15 @@ nav{
 .nav-icons{
     display: flex;
     align-items: center;
+    fill:inherit; stroke:inherit;
     & div:not(:first-child){
         margin-left: 50px;
+    }
+    & img {
+        transition: filter $duration ease-in;
+    }
+    & img:hover{
+        filter: invert(74%) sepia(95%) saturate(2397%) hue-rotate(3deg) brightness(100%) contrast(104%)
     }
 }
 
@@ -56,10 +63,23 @@ nav{
 }
 
 //MEDIA
+@media (max-width: 1110px) {
+    .nav-wrapper{
+        padding: 0 60px;
+        height: 120px;
+    }
+}
 
 @media (max-width: 1000px) {
     .logo{
         display: none;
+    }
+}
+
+@media (max-width: 769px) {
+    .nav-wrapper{
+        padding: 0 40px;
+        height: 100px;
     }
 }
 
