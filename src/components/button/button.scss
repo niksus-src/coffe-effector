@@ -1,0 +1,18 @@
+@import "../../style/config.scss";
+
+.button{
+    max-width: 400px;
+    max-height: 80px;
+    background-color: $accent;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    padding: 20px 55px;
+    cursor: pointer;
+    transition: background-color .25s ease-in;
+
+    &:hover{
+        background-color: $accent-hover;
+    }
+}

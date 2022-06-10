@@ -6,13 +6,17 @@ import './app.scss'
 
 import NavBar from './navBar/NavBar';
 
+import Main from '../pages/main';
+
 const App = () => {
   return (
     <Router>
       <NavBar/>
 
       <Switch>
-       <Route path='/catalog'></Route>
+       <Route path='/'>
+         <Main/>
+       </Route>
       </Switch>
     </Router>
 

@@ -35,6 +35,7 @@ const Search: React.FC<Props> = ({closeSearch}) => {
                         <div className="found-item">Ячменный напиток Millor - Здоровое питание</div>
                         <div className="found-item">Ячменный напиток Millor - Здоровое питание</div>
                         <div className="found-item">Ячменный напиток Millor - Здоровое питание</div>
+                        <div className="found-item">Ячменный напиток Millor - Здоровое питание</div>
                         <div className="found-empty">Ничего не найдено</div>
                     </div>
                 }

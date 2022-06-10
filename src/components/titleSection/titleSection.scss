@@ -1,0 +1,106 @@
+@import "../../style/config.scss"; 
+
+.title-wrapper{
+    margin-top: 260px;
+    padding: 0 100px;
+}
+
+.title{
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.title-desc{
+    padding-top: 60px;
+    font-size: 25px;
+    max-width: 800px;
+    padding-bottom: 90px;
+    & span{
+        font-weight: bold;
+    }
+}
+
+.title-bg{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url(../../img/top-section/background.svg);
+    background-size: contain;
+    background-position: right top;
+    background-repeat: no-repeat;
+    width: 500px;
+    height: 100%;
+    z-index: -2;    
+}
+
+.title-content{
+    display: flex;
+}
+
+.title-content_text{
+    display: flex;
+    flex-direction: column;
+}
+
+.coffe{
+    background-image: url(../../img/top-section/coffe.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 900px;
+    height: 900px;
+    position: absolute;
+    right: 10%;
+    top: 15%;
+    z-index: -1;    
+}
+
+
+//MEDIA
+@media (max-width: 1230px) {
+    .title-bg{
+        background-size: contain;
+    }
+    .coffe{
+        display: none;
+    }
+    .title{
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 1000px) {
+}
+
+@media (max-width: 770px) {
+    .title-bg{
+        width: 300px;
+    }
+    .title-wrapper{
+        padding: 0 40px;
+    }
+    .title-desc{
+        padding-bottom: 50px;
+    }
+    .title-btn{
+        padding: 15px 40px;
+        max-width: 300px;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 426px) {
+    .title-wrapper{
+        margin-top: 120px;
+        padding: 0 10px;
+    }
+    
+    .title-desc{
+        padding-bottom: 50px;
+    }
+
+    .title-btn{
+        padding: 10px 30px;
+        max-width: 250px;
+        font-size: 25px;
+    }
+}

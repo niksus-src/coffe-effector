@@ -76,6 +76,15 @@
 }
 
 //MEDIA 
+@media (max-width: 1110px) {
+    .found-item{
+        padding: 10px 35px;
+    }
+    .found-empty{
+        padding: 10px 35px;
+    }
+}
+
 @media (max-width: 426px) {
     .search-icon{
         img {width: 20px;}
