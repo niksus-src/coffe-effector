@@ -38,7 +38,7 @@ nav{
         border-bottom: 0 solid $accent;
     
         &:hover{
-            border-bottom: 3px solid $accent;
+            border-bottom: 3px solid $accent-hover;
         }
     }
 }
@@ -54,7 +54,7 @@ nav{
         transition: filter $duration ease-in;
     }
     & img:hover{
-        filter: invert(74%) sepia(95%) saturate(2397%) hue-rotate(3deg) brightness(100%) contrast(104%)
+        filter: invert(60%) sepia(100%) saturate(2019%) hue-rotate(12deg) brightness(101%) contrast(103%);
     }
 }
 

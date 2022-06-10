@@ -1,0 +1,141 @@
+@import "../../style/config.scss";
+
+.card{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(146, 146, 146, 0.25);
+    border-radius: 20px;
+    width: 400px;
+    height: 600px;
+    z-index: 15;
+    padding: 20px 35px;
+    position: relative;
+    margin-left: 20px;
+    &:not(:last-child){
+        margin-left: 20px;
+    }
+}
+.sale{
+    position: absolute;
+    top: -5%;
+    font-size: 35px;
+    font-weight: bold;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $accent;
+}
+
+.heft{
+    float: right;
+    background: #FFF7E1;
+    border: 1px solid #F9B300;
+    border-radius: 5px;
+    & select{
+        font-size: 18px;
+        padding: 3px 15px;
+        background: #FFF7E1;
+    }
+}
+
+.card-feature{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-left: 20px;
+}
+
+.card-grain{
+    
+    margin-bottom: 15px;
+    & li {
+        display:inline-block;
+        img {
+            width: 20px;
+            height: 20px;
+        }
+        // list-style-image: url(../../img/icons/grain.png)
+    }
+}
+
+.card-content{
+    display: flex;
+    margin-top: 60px;
+}
+
+.card-img{
+    img{
+        width: 170px;
+        height: 310px;
+    }
+}
+
+.card-title{
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.card-desc{
+    font-size: 18px;
+}
+
+.price{
+    display: inline-block;
+    margin-top: 35px;
+    font-size: 35px;
+    font-weight: bold;
+    position: relative;
+}
+
+.oldPrice{
+    position: absolute;
+    top: -70%;
+    font-size: 25px;
+    font-weight: normal;
+    color: #C6C6C6;
+    text-decoration: line-through;
+}
+
+.card-coffe-characteristic{
+    font-size: 18px;
+    &:not(:last-child){
+        margin-bottom: 15px;
+    }
+    ul{
+        margin-top: 10px;
+    }
+    li{
+        display: inline-block;
+        &:not(:first-child){
+            margin-left: 2px;
+        }
+    }
+    .active{
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: $accent;
+    }
+    .disable{
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #F0F0F0;;
+    }
+}
+
+.card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-btn{
+    max-width: 170px;
+    max-height: 60px;
+    font-size: 18px;
+    padding: 15px 40px;
+}

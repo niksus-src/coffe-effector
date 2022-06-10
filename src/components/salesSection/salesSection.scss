@@ -1,0 +1,83 @@
+@import "../../style/config.scss";
+
+.sales-wrapper{
+    margin-top: 200px;
+    padding: 0 100px;
+}
+
+.sales-title{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: right;
+    &_desc{
+        margin-top: 50px;
+        text-align: right;
+        font-size: 25px;
+        font-weight: normal;
+        padding-left: 20%;
+    
+    }
+}
+
+.sales-bg{
+    background-image: url(../../img/sales-section/background.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    width: 500px;
+    height: 800px;
+    z-index: -2;
+}
+
+.sales-grain{
+    z-index: -2;
+    background-image: url(../../img/sales-section/grain.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 320px;
+    height: 750px;
+    position: absolute;
+    left: 0;
+    top: 850px;
+}
+.sales-cards-item{
+    padding: 50px 0;
+    max-width: 1300px;
+}
+
+.slick-list {
+    max-width: 1300px;
+	will-change: transform;
+}
+
+.arrow{
+    border: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background-color: $accent;
+    transition: background-color .25s ease-in;
+    
+    &:hover{
+        background-color: $accent-hover;
+    }
+}
+
+.arrow-right{
+    position: absolute;
+    right: 5%;
+    transform: rotate(180deg);
+}
+
+.arrow-left{
+    position: absolute;
+    left: 5%;
+}
+
+.slick-slider{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}

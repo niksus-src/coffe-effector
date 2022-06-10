@@ -18,9 +18,10 @@ $text-color: #000;
 $text-gray: #C6C6C6;
 
 //GLOBAL STYLE 
-body{
+input {
+    outline:none;
 }
 
-input {
+select {
     outline:none;
 }
