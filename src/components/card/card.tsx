@@ -4,8 +4,35 @@ import grain from '../../img/icons/grain.png'
 import coffe from '../../img/coffe/coffe.png'
 
 import Button from '../button/button'
+import { ReactElement } from 'react'
 
-const Card = () => {
+type Props = {
+    name: string,
+    roasting: number,
+    sourness: number,
+    bitterness: number,
+    saturation: number,
+}
+
+const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation}) => {
+
+    const renderFeature = (amount: number = 1) => {
+        let renderElements = []
+        
+        for (let index = 0; index <= amount; index++) {
+            renderElements.push(<li key={index}><div className="active"></div></li>)
+        }
+        return renderElements
+    }
+
+    const renderGrain = (amount: number = 1) => {
+        let renderElements = []
+
+        for (let index = 0; index <= amount; index++) {
+            renderElements.push(<li><img src={grain} alt="grain" /></li>)
+        }
+        return renderElements
+    }
 
     return(
         <div className="card">
@@ -22,59 +49,30 @@ const Card = () => {
                 <div className="card-feature">
                     <div className="card-grain">
                         <ul>
-                            <li><img src={grain} alt="grain" /></li>
-                            <li><img src={grain} alt="grain" /></li>
-                            <li><img src={grain} alt="grain" /></li>
+                        {renderGrain(roasting)}
                         </ul>
                     </div>
                     <div className="card-coffe-characteristic">
                         Кислинка
                         <ul>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
+                            {renderFeature(sourness)}
                         </ul>
                     </div>
                     <div className="card-coffe-characteristic">
                         Горчинка
                         <ul>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
+                            {renderFeature(bitterness)}
                         </ul>
                     </div>
                     <div className="card-coffe-characteristic">
                         Насыщенность
                         <ul>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="active"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
-                            <li><div className="disable"></div></li>
+                            {renderFeature(saturation)}
                         </ul>
                     </div>
                 </div>
             </div>
-            <div className="card-title">Blend Crema</div>
+            <div className="card-title">{name}</div>
             <div className="card-desc">Свежеобжаренный кофе - описание товара, вкус, аромат</div>
 
             <div className="card-footer">            
