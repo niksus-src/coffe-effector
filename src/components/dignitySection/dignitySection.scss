@@ -1,6 +1,9 @@
 .dignity{
     padding: 100px 200px;
     position: relative;
+    background-image: url(../../img/dignity-section/background.png);
+    background-size: cover;
+    height: 2000px;
 }
 
 .dignity-bg{
@@ -17,7 +20,7 @@
 .dignity-coffe{
     position: absolute;
     left: 2%;
-    top: 120%;
+    top: 12%;
 }
 
 .dignity-top{
@@ -50,7 +53,8 @@
     left: -120px;
 }
 
-.dignity-bottom-content{
+.dignity-bottom{
+    position: relative;
     float: left;
     color: #fff;
     padding: 200px 0;
@@ -74,6 +78,9 @@
 
 //MEDIA
 @media (max-width: 1110px) {
+    .dignity{
+        height: 1920px;
+    }
     .dignity-coffe{
         display: none;
     }
@@ -83,7 +90,7 @@
     .dignity-bottom-title{
         padding-bottom: 50px;
     }
-    .dignity-bottom-content{
+    .dignity-bottom{
         padding: 150px 0;
     }
 }
@@ -95,7 +102,7 @@
     .dignity-bottom-title{
         padding-bottom: 40px;
     }
-    .dignity-bottom-content{
+    .dignity-bottom{
         padding: 300px 0;
     }
     .dignity-top-content{
@@ -131,7 +138,7 @@
     .dignity-bottom-title{
         padding-bottom: 20px;
     }
-    .dignity-bottom-content{
+    .dignity-bottom{
         padding: 110px 0 0 0;
     }
     .dignity-top-content{

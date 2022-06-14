@@ -1,0 +1,64 @@
+@import "../../style/config.scss";
+
+$duration: .25s;
+
+footer{
+    width: 100%;
+    transition: background-color $duration ease-in, box-shadow .1s ease-in;
+}
+
+.footer_active{
+    background-color: #fff;
+    box-shadow: 0px 5px 20px rgba(157, 157, 157, 0.25);
+}
+
+.footer-wrapper{
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background-color: transparent;
+}
+
+.footer-content{
+    font-size: 25px;
+    & a:not(:first-child){
+        margin-left: 100px;
+    }
+    a{
+        color: $text-color;
+        text-decoration: none;
+        transition: border-bottom .1s ease-in;
+        border-bottom: 0 solid $accent;
+    
+        &:hover{
+            border-bottom: 3px solid $accent-hover;
+        }
+    }
+}
+
+
+//MEDIA
+@media (max-width: 1110px) {
+    .footer-wrapper{
+        height: 100px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+}
+
+@media (max-width: 769px) {
+}
+
+@media (max-width: 426px) {
+    .footer-logo{
+        display: none;
+    }
+    .footer-content{
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -10,8 +10,8 @@ import Button from '../button/button'
 const Dignity = () => {
 
     return(
-        <div className="dignity">
-            <div className="dignity-bg"></div>
+        <section className="dignity">
+            {/* <div className="dignity-bg"></div> */}
             <div className="dignity-top">
                 <div className="dignity-coffe">
                     <img src={coffe} alt="coffe" />
@@ -58,7 +58,7 @@ const Dignity = () => {
                 <Button text={'Перейти в каталог'} classes={'dignity-bottom-btn'}/>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
