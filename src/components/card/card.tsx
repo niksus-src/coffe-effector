@@ -34,7 +34,7 @@ const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation
         let renderElements = []
 
         for (let index = 0; index <= amount; index++) {
-            renderElements.push(<li><img src={grain} alt="grain" /></li>)
+            renderElements.push(<li key={index}><img src={grain} alt="grain" /></li>)
         }
         return renderElements
     }

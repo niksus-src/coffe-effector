@@ -14,6 +14,10 @@ const SalesSection = () => {
         nextArrow: <SlickArrowRight />,
         responsive: [
             {
+            breakpoint: 1445,
+            settings: { slidesToShow: 2, slidesToScroll: 1, arrows: false }
+          },
+            {
               breakpoint: 1025,
               settings: { slidesToShow: 2, slidesToScroll: 1, arrows: false }
             },
@@ -37,12 +41,12 @@ const SalesSection = () => {
             </div>
         <div className="sales-cards">
             <Slider {...settings}>
-                <div className='sales-cards-item'><Card key={1} name='Colombia Supremo' roasting={3} sourness={6} bitterness={2} saturation={5}/></div>
-                <div className='sales-cards-item'><Card key={2} name='Blend Espresso' roasting={1} sourness={9} bitterness={5} saturation={1}/></div>
-                <div className='sales-cards-item'><Card key={3} name='Blend Gurme' roasting={5} sourness={2} bitterness={4} saturation={4}/></div>
-                <div className='sales-cards-item'><Card key={4} name='Brazil Santos' roasting={2} sourness={1} bitterness={7} saturation={7}/></div>
-                <div className='sales-cards-item'><Card key={5} name='Brazil Yellow Bourbon' roasting={0} sourness={1} bitterness={2} saturation={10}/></div>
-                <div className='sales-cards-item'><Card key={6} name='Columbia Decaff' roasting={3} sourness={6} bitterness={1} saturation={5}/></div>
+                <div key={1} className='sales-cards-item'><Card key={11} name='Colombia Supremo' roasting={3} sourness={6} bitterness={2} saturation={5}/></div>
+                <div key={2} className='sales-cards-item'><Card key={22} name='Blend Espresso' roasting={1} sourness={9} bitterness={5} saturation={1}/></div>
+                <div key={3} className='sales-cards-item'><Card key={33} name='Blend Gurme' roasting={5} sourness={2} bitterness={4} saturation={4}/></div>
+                <div key={4} className='sales-cards-item'><Card key={44} name='Brazil Santos' roasting={2} sourness={1} bitterness={7} saturation={7}/></div>
+                <div key={5} className='sales-cards-item'><Card key={55} name='Brazil Yellow Bourbon' roasting={0} sourness={1} bitterness={2} saturation={10}/></div>
+                <div key={6} className='sales-cards-item'><Card key={66} name='Columbia Decaff' roasting={3} sourness={6} bitterness={1} saturation={5}/></div>
             </Slider>
         </div>
 

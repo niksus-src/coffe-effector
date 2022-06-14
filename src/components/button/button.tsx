@@ -5,7 +5,8 @@ type Props = {
     classes: string
 }
 
-const Button: React.FC<Props> = ({text, classes}) => {
+const Button: React.FC<Props> = (props) => {
+    const {text, classes} = props
 
     return(
         <button className={`button ${classes}`}>{text}</button>
