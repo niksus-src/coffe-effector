@@ -35,14 +35,14 @@
     padding: 100px;
     margin-top: 40px;
 
-    .card-content-wrapper{
+    .card-main-wrapper{
         display: flex;
         .card-img{
             width: 40%;
             border-radius: 20px;
             object-fit: contain;
         }
-        .card-content{
+        .card-main{
             margin-left: 150px;
 
             .card-title{
@@ -84,7 +84,7 @@
         }
     }
 }
-.card-feature{
+.card-feature-item{
     display: flex;
 }
 
@@ -117,7 +117,7 @@
     }
 }
 
-.heft{
+.heft-item{
     display: flex;
     align-items: center;
 
@@ -249,7 +249,7 @@
 
 //MEDIA
 @media (max-width: 1300px) {
-    .card-content{
+    .card-main{
         margin-left: 20px !important;
     }
     .card-img{
@@ -286,9 +286,9 @@
 
 @media (max-width: 426px) {
     .item{
-        padding: 10px;
+        padding: 0;
     }
-    .card-item .card-content-wrapper{
+    .card-item .card-main-wrapper{
         display: block;
     }
     .characteristic-wrapper{
@@ -299,5 +299,8 @@
     }
     .characteristic-wrapper .characteristic{
         width: auto;
+    }
+    .item-links{
+        margin-top: 100px;
     }
 }

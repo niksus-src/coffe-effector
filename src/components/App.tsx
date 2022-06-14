@@ -16,8 +16,11 @@ const App = () => {
       <NavBar />
 
       <Switch>
+        <Route path="/catalog">
+          <ItemCoffe/>
+        </Route>
         <Route path="/">
-          <ItemCoffe />
+          <Main/>
         </Route>
       </Switch>
       <Footer />

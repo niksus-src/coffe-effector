@@ -65,9 +65,9 @@ const ItemCoffe = () => {
       </div>
 
       <div className="item-wrapper card-item">
-        <div className="card-content-wrapper">
+        <div className="card-main-wrapper">
           <img className="card-img" src={coffe} alt="coffe" />
-          <div className="card-content">
+          <div className="card-main">
             <div className="card-grain">
               <ul>{renderGrain(4)}</ul>
             </div>
@@ -79,7 +79,7 @@ const ItemCoffe = () => {
               имеет немецкое оборудование марки Probat по обжарке кофе и
               итальянские агломераторы для производства растворимой продукции.
             </div>
-            <div className="card-feature">
+            <div className="card-feature-item">
               <div className="card-coffe-characteristic">
                 Кислинка
                 <ul>{renderFeature(3)}</ul>
@@ -93,7 +93,7 @@ const ItemCoffe = () => {
                 <ul>{renderFeature(2)}</ul>
               </div>
             </div>
-            <div className="heft">
+            <div className="heft-item">
               <input
                 type="radio"
                 id="250"
