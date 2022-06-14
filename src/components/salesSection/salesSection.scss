@@ -81,3 +81,28 @@
     justify-content: center;
     position: relative;
 }
+
+//MEDIA
+@media (max-width: 1110px) {
+
+}
+
+@media (max-width: 1000px) {
+
+}
+
+@media (max-width: 769px) {
+
+}
+
+@media (max-width: 426px) {
+    .sales-bg{
+        width: auto;
+    }
+    .sales-wrapper{
+        padding: 0; 
+    }
+    .sales-title{
+        padding: 0 20px;
+    }
+}

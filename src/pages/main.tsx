@@ -1,5 +1,6 @@
 import TitleSection from "../components/titleSection/TitleSection"
 import SalesSection from "../components/salesSection/SalesSection"
+import DignitySection from "../components/dignitySection/DignitySection"
 
 const Main = () => {
     
@@ -7,6 +8,7 @@ const Main = () => {
         <>
             <TitleSection/>
             <SalesSection/>
+            <DignitySection/>
         </>
     )
 }

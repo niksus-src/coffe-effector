@@ -19,8 +19,13 @@ const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation
     const renderFeature = (amount: number = 1) => {
         let renderElements = []
         
-        for (let index = 0; index <= amount; index++) {
+        for (let index = 0; index < amount; index++) {
             renderElements.push(<li key={index}><div className="active"></div></li>)
+        }
+        if (amount !== 10) {
+            for (let index = amount; index < 10; index++) {
+                renderElements.push(<li key={index}><div className="disable"></div></li>)
+            }
         }
         return renderElements
     }
@@ -35,7 +40,7 @@ const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation
     }
 
     return(
-        <div className="card">
+        <div className="card" key={name}>
             <div className="heft">
                 <select name="heft" id="heft">
                     <option value="250">250 г.</option>
