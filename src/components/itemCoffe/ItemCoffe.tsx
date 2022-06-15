@@ -56,7 +56,7 @@ const ItemCoffe = () => {
 
   return (
     <div className="item">
-      <div className="item-links">
+      <div className="links">
         <Link to="/">Главная</Link>
         <div className="circle-decoration"></div>
         <Link to="/catalog">Каталог товаров</Link>

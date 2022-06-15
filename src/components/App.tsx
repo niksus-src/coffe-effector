@@ -9,20 +9,28 @@ import Footer from "./footer/Footer";
 
 import Main from "../pages/main";
 import ItemCoffe from "./itemCoffe/ItemCoffe";
+import Layout from "./layout";
+import Contacts from "./contacts/contacts";
+import Catalog from "../pages/catalog";
 
 const App = () => {
   return (
     <Router>
       <NavBar />
-
+      <Layout>
       <Switch>
         <Route path="/catalog">
-          <ItemCoffe/>
+          <Catalog/>
+        </Route>
+        <Route path="/contacts">
+          <Contacts/>
         </Route>
         <Route path="/">
           <Main/>
         </Route>
       </Switch>
+      </Layout>
+      
       <Footer />
     </Router>
   );
