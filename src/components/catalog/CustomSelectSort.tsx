@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useStore } from "effector-react";
 import { serviceCatalog } from "../../services/catalog/catalogService";
 import styles from "./customSelectsSort.module.scss";
 
@@ -11,9 +10,6 @@ const selectOptions = [
 ];
 
 const CustomSelectSort = () => {
-  const catalogSortDirection = useStore(serviceCatalog.$catalogSortDirection);
-
-  console.log("в компоненте", catalogSortDirection);
 
   const [visible, setVisible] = useState<boolean>(false);
   const [current, setCurrent] = useState<string>(selectOptions[0].title);

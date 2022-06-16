@@ -66,13 +66,15 @@
 
 .arrow-right{
     position: absolute;
-    right: 5%;
+    right: 0;
     transform: rotate(180deg);
+    z-index: 20;
 }
 
 .arrow-left{
     position: absolute;
-    left: 5%;
+    left: 0;
+    z-index: 20;
 }
 
 .slick-slider{

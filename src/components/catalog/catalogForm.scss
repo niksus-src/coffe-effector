@@ -200,6 +200,22 @@
   }
 }
 
+.catalog-form-btn{
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: transparent;
+  margin-top: 20px;
+  cursor: pointer;
+  padding: 10px;
+  transition: color .25s ease-in;
+  text-decoration: underline;
+
+  &:hover{
+    color: $accent;
+  }
+}
+
 //MEDIA
 @media (max-width: 1400px) {
   .catalog-title{
@@ -270,5 +286,8 @@
   }
   .catalog-form-content-main_item:nth-child(even){
     margin-left: 10px;
+  }
+  .radio-main label{
+    margin-top: 25px;
   }
 }
