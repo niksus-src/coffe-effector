@@ -12,9 +12,11 @@ type Props = {
     sourness: number,
     bitterness: number,
     saturation: number,
+    sale?: boolean,
+    classes?: string 
 }
 
-const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation}) => {
+const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation, sale = false, classes = ''}) => {
 
     const renderFeature = (amount: number = 1) => {
         let renderElements = []
@@ -40,7 +42,7 @@ const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation
     }
 
     return(
-        <div className="card" key={name}>
+        <div className={`card ${classes}`} key={name}>
             <div className="heft">
                 <select name="heft" id="heft">
                     <option value="250">250 г.</option>
@@ -82,11 +84,11 @@ const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation
 
             <div className="card-footer">            
                 <div className="price">250 ₽
-                    <div className="oldPrice">350 ₽</div>
+                    {sale && <div className="oldPrice">350 ₽</div>}
                 </div>
                 <Button text='В корзину' classes='card-btn'/>
             </div>
-            <div className="sale">%</div>
+            {sale && <div className="sale">%</div>}
         </div>
     )
 }

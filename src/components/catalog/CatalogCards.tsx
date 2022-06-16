@@ -1,0 +1,82 @@
+import "./catalogCards.scss";
+
+import Card from "../card/card";
+import CustomSelectSort from "./CustomSelectSort";
+
+const CatalogCards = () => {
+  return (
+    <div className="catalog-cards-wrapper">
+    <CustomSelectSort/>
+      <div className="catalog-cards">
+        <Card
+          name="Blend Crema"
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          sale={true}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+        <Card
+          name={"Blend Crema"}
+          roasting={3}
+          sourness={6}
+          bitterness={4}
+          saturation={7}
+          classes="catalog-card"
+        />
+      </div>
+      <button className="catalog-cards_btn">Показать еще</button>
+    </div>
+  );
+};
+
+export default CatalogCards;

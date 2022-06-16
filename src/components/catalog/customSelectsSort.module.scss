@@ -1,0 +1,83 @@
+@import "../../style/config.scss";
+
+
+.catalog-cards-sort {
+    margin-left: 20px;
+    margin-bottom: 50px;
+    border: none;
+    appearance: none;
+    width: auto;
+    font-size: 18px;
+    text-decoration: underline;
+    transition: color 0.25s ease-in;
+    min-width: 200px;
+    background-color: #f5f5f5;
+  
+    &:hover {
+      color: $accent;
+    }
+  
+    option {
+      padding: 10px;
+      font-size: 16px;
+      color: #000;
+    }
+  }
+
+  .selectorWrapper {
+    margin-left: 20px;
+    user-select: none;      
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 40px;
+    height: auto;
+    font-size: 20px;
+    text-decoration: underline;
+    transition: color .25s ease-in;
+    display: inline-block;
+    width: 250px;
+    padding: 20px;
+    &:hover{
+      color: $accent;
+    }
+
+    .selector {
+
+    }
+
+    .options {
+      width: 250px;
+      position: absolute;
+      left: 0;
+      z-index: 16;
+      color: #000;
+
+      .option{
+        padding: 5px 20px;
+        margin-top: 15px;
+        transition: background-color .25s ease-in;
+
+        &:last-child{
+          margin-bottom: 15px;
+        }
+        &:first-child{
+          border-top: 1px solid #E9E9E9;
+        }
+      }
+
+      .option:hover{
+        background-color: #ebebeb;
+      }
+    }
+  }
+  .wrapper_active{
+    background-color: #fff;
+    box-shadow: 0px 0px 20px rgba(103, 103, 103, 0.25);
+    border-radius: 5px;
+  }
+
+  .option_active{
+    background-color: #fff;
+    box-shadow: 0px 15px 20px rgba(103, 103, 103, 0.25);
+    border-radius: 5px;
+  }
