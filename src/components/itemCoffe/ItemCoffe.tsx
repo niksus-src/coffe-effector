@@ -56,11 +56,11 @@ const ItemCoffe = () => {
 
   return (
     <div className="item">
-      <div className="links">
+      <div className="links-item-coffe">
         <Link to="/">Главная</Link>
-        <div className="circle-decoration"></div>
+        <div className="circle-decoration-item-coffe"></div>
         <Link to="/catalog">Каталог товаров</Link>
-        <div className="circle-decoration"></div>
+        <div className="circle-decoration-item-coffe"></div>
         <Link to="/catalog">Colombia Supremo</Link>
       </div>
 

@@ -8,7 +8,7 @@
     padding: 170px 100px 20px 100px;
 }
 
-.links{
+.links-item-coffe{
     display: flex;
     align-items: center;
     font-size: 18px;
@@ -62,7 +62,7 @@
 
 
 
-.circle-decoration{
+.circle-decoration-item-coffe{
     display: inline-block;
     width: 5px;
     height: 5px;
@@ -298,9 +298,10 @@
         width: auto;
     }
     .characteristic-wrapper .characteristic{
+        margin-top: 20px;
         width: auto;
     }
-    .item-links{
-        margin-top: 100px;
+    .links-item-coffe{
+        padding-top: 100px;
     }
 }

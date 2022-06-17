@@ -19,6 +19,9 @@ const App = () => {
       <NavBar />
       <Layout>
       <Switch>
+        <Route path="/itemCard">
+          <ItemCoffe/>
+        </Route>
         <Route path="/catalog">
           <Catalog/>
         </Route>

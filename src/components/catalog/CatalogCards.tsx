@@ -15,6 +15,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -23,6 +25,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -32,6 +36,8 @@ const CatalogCards = () => {
           saturation={7}
           sale={true}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -40,6 +46,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -48,6 +56,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -56,6 +66,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -64,6 +76,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
         <Card
           name={"Blend Crema"}
@@ -72,6 +86,8 @@ const CatalogCards = () => {
           bitterness={4}
           saturation={7}
           classes="catalog-card"
+          textBtn='Подробнее'
+          linkTo='/itemCard'
         />
       </div>
       <button className="catalog-cards_btn">Показать еще</button>

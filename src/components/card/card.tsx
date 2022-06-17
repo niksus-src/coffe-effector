@@ -1,96 +1,113 @@
+import "./card.scss";
+import grain from "../../img/icons/grain.png";
+import coffe from "../../img/coffe/coffe.png";
 
-import './card.scss'
-import grain from '../../img/icons/grain.png'
-import coffe from '../../img/coffe/coffe.png'
-
-import Button from '../button/button'
-import { ReactElement } from 'react'
+import Button from "../button/button";
 
 type Props = {
-    name: string,
-    roasting: number,
-    sourness: number,
-    bitterness: number,
-    saturation: number,
-    sale?: boolean,
-    classes?: string 
-}
+  name: string;
+  roasting: number;
+  sourness: number;
+  bitterness: number;
+  saturation: number;
+  sale?: boolean;
+  classes?: string;
+  link?: string;
+  textBtn?: string,
+  linkTo?: string
+};
 
-const Card: React.FC<Props> = ({name, roasting, sourness, bitterness, saturation, sale = false, classes = ''}) => {
+const Card: React.FC<Props> = ({
+  name,
+  roasting,
+  sourness,
+  bitterness,
+  saturation,
+  sale = false,
+  classes = "",
+  link = '',
+  textBtn = 'В корзину',
+  linkTo
+}) => {
+  const renderFeature = (amount: number = 1) => {
+    let renderElements = [];
 
-    const renderFeature = (amount: number = 1) => {
-        let renderElements = []
-        
-        for (let index = 0; index < amount; index++) {
-            renderElements.push(<li key={index}><div className="active"></div></li>)
-        }
-        if (amount !== 10) {
-            for (let index = amount; index < 10; index++) {
-                renderElements.push(<li key={index}><div className="disable"></div></li>)
-            }
-        }
-        return renderElements
+    for (let index = 0; index < amount; index++) {
+      renderElements.push(
+        <li key={index}>
+          <div className="active"></div>
+        </li>
+      );
     }
-
-    const renderGrain = (amount: number = 1) => {
-        let renderElements = []
-
-        for (let index = 0; index <= amount; index++) {
-            renderElements.push(<li key={index}><img src={grain} alt="grain" /></li>)
-        }
-        return renderElements
+    if (amount !== 10) {
+      for (let index = amount; index < 10; index++) {
+        renderElements.push(
+          <li key={index}>
+            <div className="disable"></div>
+          </li>
+        );
+      }
     }
+    return renderElements;
+  };
 
-    return(
-        <div className={`card ${classes}`} key={name}>
-            <div className="heft">
-                <select name="heft" id="heft">
-                    <option value="250">250 г.</option>
-                    <option value="250">1000 г.</option>
-                </select>
-            </div>
-            <div className="card-content">
-                <div className="card-img">
-                    <img src={coffe} alt="coffe" />
-                </div>
-                <div className="card-feature">
-                    <div className="card-grain">
-                        <ul>
-                        {renderGrain(roasting)}
-                        </ul>
-                    </div>
-                    <div className="card-coffe-characteristic">
-                        Кислинка
-                        <ul>
-                            {renderFeature(sourness)}
-                        </ul>
-                    </div>
-                    <div className="card-coffe-characteristic">
-                        Горчинка
-                        <ul>
-                            {renderFeature(bitterness)}
-                        </ul>
-                    </div>
-                    <div className="card-coffe-characteristic">
-                        Насыщенность
-                        <ul>
-                            {renderFeature(saturation)}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className="card-title">{name}</div>
-            <div className="card-desc">Свежеобжаренный кофе - описание товара, вкус, аромат</div>
+  const renderGrain = (amount: number = 1) => {
+    let renderElements = [];
 
-            <div className="card-footer">            
-                <div className="price">250 ₽
-                    {sale && <div className="oldPrice">350 ₽</div>}
-                </div>
-                <Button text='В корзину' classes='card-btn'/>
-            </div>
-            {sale && <div className="sale">%</div>}
+    for (let index = 0; index <= amount; index++) {
+      renderElements.push(
+        <li key={index}>
+          <img src={grain} alt="grain" />
+        </li>
+      );
+    }
+    return renderElements;
+  };
+
+  return (
+    <div className={`card ${classes}`} key={name}>
+      <div className="heft">
+        <select name="heft" id="heft">
+          <option value="250">250 г.</option>
+          <option value="250">1000 г.</option>
+        </select>
+      </div>
+      <div className="card-content">
+        <div className="card-img">
+          <img src={coffe} alt="coffe" />
         </div>
-    )
-}
+        <div className="card-feature">
+          <div className="card-grain">
+            <ul>{renderGrain(roasting)}</ul>
+          </div>
+          <div className="card-coffe-characteristic">
+            Кислинка
+            <ul>{renderFeature(sourness)}</ul>
+          </div>
+          <div className="card-coffe-characteristic">
+            Горчинка
+            <ul>{renderFeature(bitterness)}</ul>
+          </div>
+          <div className="card-coffe-characteristic">
+            Насыщенность
+            <ul>{renderFeature(saturation)}</ul>
+          </div>
+        </div>
+      </div>
+      <div className="card-title">{name}</div>
+      <div className="card-desc">
+        Свежеобжаренный кофе - описание товара, вкус, аромат
+      </div>
 
-export default Card
+      <div className="card-footer">
+        <div className="price">
+          250 ₽{sale && <div className="oldPrice">350 ₽</div>}
+        </div>
+        <Button text={textBtn} classes="card-btn" linkTo={linkTo}/>
+      </div>
+      {sale && <div className="sale">%</div>}
+    </div>
+  );
+};
+
+export default Card;
