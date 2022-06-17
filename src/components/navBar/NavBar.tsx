@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Search from './search/Search'
+import CustomLink from '../customLink/customLink'
 
 import logo from '../../img/icons/logo.png'
 import searchIcon from '../../img//icons/searchIcon.svg'
@@ -18,15 +19,15 @@ const NavBar = () => {
         <nav className={navStyle}>
             <div className="nav-wrapper">
                 <div className="logo">
-                    <Link to="/">
+                    <CustomLink to="/">
                         <img src={logo} alt="logo" />
-                    </Link>
+                    </CustomLink>
                 </div>
                 {
                     !isActiveBar && 
                     <div className="nav-content">
-                        <Link to="/catalog">Каталог товаров</Link>
-                        <Link to="/contacts">Контакты</Link>
+                        <CustomLink to="/catalog">Каталог товаров</CustomLink>
+                        <CustomLink to="/contacts">Контакты</CustomLink>
                     </div>
                 }
                 { isActiveBar && <Search closeSearch={setIsActiveBar}/>}
@@ -38,9 +39,9 @@ const NavBar = () => {
                         </div>
                     }
                     <div className="nav-icons_basket icon">
-                        <Link to="/contacts">
+                        <CustomLink to="/basket">
                             <img src={basketIcon} alt="basketIcon" />
-                        </Link>
+                        </CustomLink>
                     </div>
                     <div className="nav-icons_account icon">
                         <img src={accountIcon} alt="accountIcon" />

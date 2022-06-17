@@ -1,5 +1,5 @@
 import './button.scss'
-import {Link} from 'react-router-dom'
+import CustomLink from '../customLink/customLink'
 
 type Props = {
     text: string,
@@ -10,7 +10,7 @@ type Props = {
 const Button: React.FC<Props> = (props) => {
     const {text, classes, linkTo = null} = props
 
-    const renderBtn = linkTo ? <Link to={linkTo} className={`button ${classes}`}>{text}</Link> : <button className={`button ${classes}`}>{text}</button>
+    const renderBtn = linkTo ? <CustomLink to={linkTo} classes={`button ${classes}`}>{text}</CustomLink> : <button className={`button ${classes}`}>{text}</button>
 
     return(
         <div>

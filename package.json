@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
     "effector": "^22.3.0",
+    "effector-forms": "0.0.24",
     "effector-react": "^22.0.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

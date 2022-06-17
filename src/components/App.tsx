@@ -12,6 +12,7 @@ import ItemCoffe from "./itemCoffe/ItemCoffe";
 import Layout from "./layout";
 import Contacts from "./contacts/contacts";
 import Catalog from "../pages/catalog";
+import Basket from "./basket/Basket";
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
       <NavBar />
       <Layout>
       <Switch>
+        <Route path="/basket">
+          <Basket/>
+        </Route>
         <Route path="/itemCard">
           <ItemCoffe/>
         </Route>

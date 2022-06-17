@@ -2,19 +2,20 @@ import './footer.scss'
 import logo from '../../img/icons/logo.png'
 
 import { Link } from 'react-router-dom'
+import CustomLink from '../customLink/customLink'
 
 const Footer = () => {
     return(
         <footer className='footer'>
             <div className="footer-wrapper">
                 <div className="footer-logo">
-                    <Link to="/">
+                    <CustomLink to="/">
                         <img src={logo} alt="logo" />
-                    </Link>
+                    </CustomLink>
                 </div>
                 <div className="footer-content">
-                    <Link to="/catalog">Каталог товаров</Link>
-                    <Link to="/contacts">Контакты</Link>
+                    <CustomLink to="/catalog">Каталог товаров</CustomLink>
+                    <CustomLink to="/contacts">Контакты</CustomLink>
                 </div>
             </div>
         </footer>
