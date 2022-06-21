@@ -10,6 +10,7 @@ import visa from "../../img/icons/visa.png";
 
 const Basket = () => {
   const renderItems = [];
+
   const { fields, hasError, errorText, submit } = useForm(deliveryForm);
 
   for (let index = 0; index < 3; index++) {
@@ -241,7 +242,11 @@ const Basket = () => {
             <button className="basket-footer-payment-btn">
               Оплатить заказ
             </button>
-            <div className="basket-footer-payment-footer">Ваши персональные данные будут использоваться для управления доступом к вашей учетной записи и для других целей, описанных в нашем документе политика конфиденциальности.</div>
+            <div className="basket-footer-payment-footer">
+              Ваши персональные данные будут использоваться для управления
+              доступом к вашей учетной записи и для других целей, описанных в
+              нашем документе политика конфиденциальности.
+            </div>
           </div>
         </div>
       </div>
