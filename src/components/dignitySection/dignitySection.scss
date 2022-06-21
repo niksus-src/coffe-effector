@@ -1,169 +1,166 @@
-.dignity{
-    padding: 100px 200px;
-    position: relative;
-    background-image: url(../../img/dignity-section/background.png);
-    background-size: cover;
-    height: 2000px;
+.dignity {
+  padding: 100px 200px;
+  position: relative;
+  background-image: url(../../img/dignity-section/background.png);
+  background-size: cover;
+  height: 2000px;
 }
 
-.dignity-bg{
-    background-image: url(../../img/dignity-section/background.png);
-    width: 100%;
-    height: 2000px;
-    background-repeat: no-repeat;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -2;
+.dignity-bg {
+  background-image: url(../../img/dignity-section/background.png);
+  width: 100%;
+  height: 2000px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -2;
 }
 
-.dignity-coffe{
-    position: absolute;
-    left: 2%;
-    top: 12%;
+.dignity-coffe {
+  position: absolute;
+  left: 2%;
+  top: 12%;
 }
 
-.dignity-top{
-    float: right;
-    max-width: 550px;
-    &-title{
-        font-size: 50px;
-        font-weight: bold;
-        padding-bottom: 100px;
-    }
-}
-
-.dignity-top-content{
-    & li{
-        position: relative;
-        padding-bottom: 80px;
-    }
-    &-el-title{
-        font-size: 30px;
-        font-weight: bold;
-        padding-bottom: 20px;
-    }
-    &-el-desc{
-        font-size: 25px;
-    }
-}
-
-.dignity-li-marker{
-    position: absolute;
-    left: -120px;
-}
-
-.dignity-bottom{
-    position: relative;
-    float: left;
-    color: #fff;
-    padding: 200px 0;
-}
-
-.dignity-bottom-title{
+.dignity-top {
+  float: right;
+  max-width: 550px;
+  &-title {
     font-size: 50px;
     font-weight: bold;
-    padding-bottom: 70px;
+    padding-bottom: 100px;
+  }
 }
 
-.dignity-bottom-desc{
+.dignity-top-content {
+  & li {
+    position: relative;
+    padding-bottom: 80px;
+  }
+  &-el-title {
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+  &-el-desc {
     font-size: 25px;
-    line-height: 1.3;
-    font-weight: lighter;
+  }
 }
 
-.dignity-bottom-btn{
-    margin-top: 100px;
+.dignity-li-marker {
+  position: absolute;
+  left: -120px;
+}
+
+.dignity-bottom {
+  position: relative;
+  float: left;
+  color: #fff;
+  padding: 200px 0;
+}
+
+.dignity-bottom-title {
+  font-size: 50px;
+  font-weight: bold;
+  padding-bottom: 70px;
+}
+
+.dignity-bottom-desc {
+  font-size: 25px;
+  line-height: 1.3;
+  font-weight: lighter;
+  margin-bottom: 100px;
 }
 
 //MEDIA
 @media (max-width: 1110px) {
-    .dignity{
-        height: 1920px;
-    }
-    .dignity-coffe{
-        display: none;
-    }
-    .dignity-bottom-desc{
-        font-size: 20px;
-    }
-    .dignity-bottom-title{
-        padding-bottom: 50px;
-    }
-    .dignity-bottom{
-        padding: 150px 0;
-    }
+  .dignity {
+    height: 1920px;
+  }
+  .dignity-coffe {
+    display: none;
+  }
+  .dignity-bottom-desc {
+    font-size: 20px;
+  }
+  .dignity-bottom-title {
+    padding-bottom: 50px;
+  }
+  .dignity-bottom {
+    padding: 150px 0;
+  }
 }
 
 @media (max-width: 769px) {
-    .dignity-bottom-desc{
-        font-size: 20px;
+  .dignity-bottom-desc {
+    font-size: 20px;
+  }
+  .dignity-bottom-title {
+    padding-bottom: 40px;
+  }
+  .dignity-bottom {
+    padding: 300px 0;
+  }
+  .dignity-top-content {
+    & li {
+      padding-bottom: 40px;
     }
-    .dignity-bottom-title{
-        padding-bottom: 40px;
+    &-el-title {
+      font-size: 25px;
+      padding-bottom: 40px;
     }
-    .dignity-bottom{
-        padding: 300px 0;
+    &-el-desc {
+      font-size: 23px;
     }
-    .dignity-top-content{
-        & li{
-            padding-bottom: 40px;
-        }
-        &-el-title{
-            font-size: 25px;
-            padding-bottom: 40px;
-        }
-        &-el-desc{
-            font-size: 23px;
-        }
+  }
+  .dignity-top {
+    &-title {
+      font-size: 40px;
+      padding-bottom: 180px;
     }
-    .dignity-top{
-        &-title{
-            font-size: 40px;
-            padding-bottom: 180px;
-        }
-    }
-    .dignity{
-        padding: 50px 20px;
-    }
+  }
+  .dignity {
+    padding: 50px 20px;
+  }
 }
 
 @media (max-width: 426px) {
-    .dignity-bg{
-        height: 1850px;
+  .dignity-bg {
+    height: 1850px;
+  }
+  .dignity-bottom-desc {
+    font-size: 18px;
+  }
+  .dignity-bottom-title {
+    padding-bottom: 20px;
+  }
+  .dignity-bottom {
+    padding: 110px 0 0 0;
+  }
+  .dignity-top-content {
+    & li {
+      list-style-image: none;
+      padding-bottom: 40px;
     }
-    .dignity-bottom-desc{
-        font-size: 18px;
+    &-el-title {
+      font-size: 22px;
+      padding-bottom: 30px;
     }
-    .dignity-bottom-title{
-        padding-bottom: 20px;
+    &-el-desc {
+      font-size: 23px;
     }
-    .dignity-bottom{
-        padding: 110px 0 0 0;
+  }
+  .dignity-top {
+    &-title {
+      font-size: 40px;
+      padding-bottom: 180px;
     }
-    .dignity-top-content{
-        & li{
-            list-style-image: none;
-            padding-bottom: 40px;
-        }
-        &-el-title{
-            font-size: 22px;
-            padding-bottom: 30px;
-        }
-        &-el-desc{
-            font-size: 23px;
-        }
-    }
-    .dignity-top{
-        &-title{
-            font-size: 40px;
-            padding-bottom: 180px;
-        }
-    }
-    .dignity{
-        padding: 50px 20px;
-    }
-    .dignity-bottom-btn{
-        margin-top: 30px;
-    }
+  }
+  .dignity {
+    padding: 50px 20px;
+  }
+  .dignity-bottom-desc {
+    margin-bottom: 30px;
+  }
 }

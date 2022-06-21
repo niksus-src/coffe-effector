@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import { isLogin } from "../services/app/appService";
 
 import "./app.scss";
 
@@ -14,29 +16,29 @@ import Contacts from "./contacts/contacts";
 import Catalog from "../pages/catalog";
 import Basket from "./basket/Basket";
 import Account from "./account/Account";
+import { useStore } from "effector-react";
+import Popup from "./popup/popup";
 
 const App = () => {
+  const login = useStore(isLogin.$isLogin);
+
+  useEffect(() => {
+    isLogin.setIsLogin(Boolean(sessionStorage.getItem("isLogin")));
+  }, []);
+
   return (
     <Router>
       <NavBar />
       <Layout>
         <Switch>
-          <Route path="/account" component={Account} />
-          <Route path="/basket">
-            <Basket />
+          <Route path="/account" component={Account}>
+            {!login && <Popup />}
           </Route>
-          <Route path="/itemCard">
-            <ItemCoffe />
-          </Route>
-          <Route path="/catalog">
-            <Catalog />
-          </Route>
-          <Route path="/contacts">
-            <Contacts />
-          </Route>
-          <Route path="/">
-            <Main />
-          </Route>
+          <Route path="/basket" component={Basket} />
+          <Route path="/itemCard" component={ItemCoffe} />
+          <Route path="/catalog" component={Catalog} />
+          <Route path="/contacts" component={Contacts} />
+          <Route path="/" component={Main} />
         </Switch>
       </Layout>
       <Footer />

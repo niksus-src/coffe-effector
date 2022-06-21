@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import "./account.scss";
 
 import personalImg from "../../img/account/personalLogo.png";
+import { isLogin } from "../../services/app/appService";
 
 const Account = () => {
   const [isOpenSpec, setIsOpenSpec] = useState(false);
   const [isCurrentBtn, setIsCurrentBtn] = useState("current");
+  const history = useHistory();
 
   return (
     <div className="account-wrapper">
       <div className="account-links">
         <Link to="/">Главная</Link>
         <div className="circle-decoration-item-coffe"></div>
-        <Link to="/catalog">Корзина</Link>
+        <Link to="/catalog">Личный кабинет</Link>
       </div>
       <div className="account-top account-block-wrapper">
         <div className="account-top-personal">
@@ -24,6 +26,16 @@ const Account = () => {
           <div className="account-top-personal-info">
             <div className="account-top-personal-info-name">
               Иван Иванов, здравствуйте!
+              <button
+                className="account-btn account-exit"
+                onClick={() => {
+                  sessionStorage.clear();
+                  isLogin.setIsLogin(false);
+                  history.push("/home");
+                }}
+              >
+                Выйти
+              </button>
             </div>
             <div className="account-top-personal-info-data">
               ivan.ivanov@gmail.com

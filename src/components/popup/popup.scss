@@ -12,6 +12,9 @@
     background-color: $accent-hover;
   }
 }
+.popup-bg {
+  width: 100%;
+}
 .popup-wrapper {
   position: fixed;
   top: 0;
@@ -29,6 +32,22 @@
   border-radius: 30px;
   height: 750px;
   display: flex;
+  position: relative;
+
+  &-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    transition: color 0.25s ease-in;
+    z-index: 155;
+    &:hover {
+      color: red;
+    }
+  }
 
   &-left {
     flex: 30%;

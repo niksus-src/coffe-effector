@@ -2,12 +2,10 @@ import "./catalogCards.scss";
 
 import Card from "../card/card";
 import CustomSelectSort from "./CustomSelectSort";
-import Popup from "../popup/popup";
 
 const CatalogCards = () => {
   return (
     <div className="catalog-cards-wrapper">
-      <Popup />
       <CustomSelectSort />
       <div className="catalog-cards">
         <Card
