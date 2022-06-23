@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./account.scss";
 
 import personalImg from "../../img/account/personalLogo.png";
-import { isLogin } from "../../services/app/appService";
+import { appService } from "../../services/app/appService";
 
 const Account = () => {
   const [isOpenSpec, setIsOpenSpec] = useState(false);
@@ -30,7 +30,7 @@ const Account = () => {
                 className="account-btn account-exit"
                 onClick={() => {
                   sessionStorage.clear();
-                  isLogin.setIsLogin(false);
+                  appService.setIsLogin(false);
                   history.push("/home");
                 }}
               >

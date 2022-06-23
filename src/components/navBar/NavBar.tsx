@@ -9,11 +9,11 @@ import basketIcon from "../../img//icons/basketIcon.svg";
 
 import "./navBar.scss";
 import { useStore } from "effector-react";
-import { isLogin } from "../../services/app/appService";
+import { appService } from "../../services/app/appService";
 import Popup from "../popup/popup";
 
 const NavBar = () => {
-  const login = useStore(isLogin.$isLogin);
+  const login = useStore(appService.$isLogin);
   const [isActiveBar, setIsActiveBar] = useState(false);
   const navStyle = isActiveBar ? "nav_active" : "";
 

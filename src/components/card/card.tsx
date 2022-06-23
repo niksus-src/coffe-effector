@@ -3,6 +3,7 @@ import grain from "../../img/icons/grain.png";
 import coffe from "../../img/coffe/coffe.png";
 
 import Button from "../button/button";
+import { useState } from "react";
 
 type Props = {
   name: string;
@@ -10,11 +11,17 @@ type Props = {
   sourness: number;
   bitterness: number;
   saturation: number;
-  sale?: boolean;
-  classes?: string;
-  link?: string;
-  textBtn?: string,
-  linkTo?: string
+  imgSrc: string;
+  sale: boolean;
+  classes: string;
+  textBtn: string;
+  linkTo: string;
+  price: {
+    [index: string]: number | null;
+  };
+  oldPrice: {
+    [index: string]: number | null;
+  };
 };
 
 const Card: React.FC<Props> = ({
@@ -23,12 +30,16 @@ const Card: React.FC<Props> = ({
   sourness,
   bitterness,
   saturation,
+  imgSrc = coffe,
   sale = false,
   classes = "",
-  link = '',
-  textBtn = 'В корзину',
-  linkTo
+  textBtn = "В корзину",
+  linkTo,
+  price,
+  oldPrice,
 }) => {
+  const [actualHeft, setActualHeft] = useState<string>("250");
+
   const renderFeature = (amount: number = 1) => {
     let renderElements = [];
 
@@ -67,14 +78,19 @@ const Card: React.FC<Props> = ({
   return (
     <div className={`card ${classes}`} key={name}>
       <div className="heft">
-        <select name="heft" id="heft">
+        <select
+          name="heft"
+          id="heft"
+          value={actualHeft}
+          onChange={(e) => setActualHeft(e.target.value)}
+        >
           <option value="250">250 г.</option>
-          <option value="250">1000 г.</option>
+          <option value="1000">1000 г.</option>
         </select>
       </div>
       <div className="card-content">
         <div className="card-img">
-          <img src={coffe} alt="coffe" />
+          <img src={process.env.PUBLIC_URL + imgSrc} alt="coffe" />
         </div>
         <div className="card-feature">
           <div className="card-grain">
@@ -101,9 +117,10 @@ const Card: React.FC<Props> = ({
 
       <div className="card-footer">
         <div className="price">
-          250 ₽{sale && <div className="oldPrice">350 ₽</div>}
+          {price?.[actualHeft]} ₽
+          {sale && <div className="oldPrice">{oldPrice?.[actualHeft]} ₽</div>}
         </div>
-        <Button text={textBtn} classes="card-btn" linkTo={linkTo}/>
+        <Button text={textBtn} classes="card-btn" linkTo={linkTo} />
       </div>
       {sale && <div className="sale">%</div>}
     </div>

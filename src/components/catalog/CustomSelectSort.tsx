@@ -5,12 +5,10 @@ import styles from "./customSelectsSort.module.scss";
 const selectOptions = [
   { title: "По убыванию цены", value: "descPrice" },
   { title: "По возрастанию цены", value: "ascPrice" },
-  { title: "По рейтингу", value: "rate" },
   { title: "По кислотности", value: "acidity" },
 ];
 
 const CustomSelectSort = () => {
-
   const [visible, setVisible] = useState<boolean>(false);
   const [current, setCurrent] = useState<string>(selectOptions[0].title);
 

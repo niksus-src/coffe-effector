@@ -11,9 +11,11 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^0.27.2",
     "effector": "^22.3.0",
     "effector-forms": "0.0.24",
     "effector-react": "^22.0.6",
+    "local-cors-proxy": "^1.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^5.3.3",
@@ -28,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "lcp --proxyUrl http://localhost:3000"
   },
   "eslintConfig": {
     "extends": [

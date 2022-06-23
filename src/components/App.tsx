@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { isLogin } from "../services/app/appService";
+import { appService } from "../services/app/appService";
 
 import "./app.scss";
 
@@ -20,10 +20,10 @@ import { useStore } from "effector-react";
 import Popup from "./popup/popup";
 
 const App = () => {
-  const login = useStore(isLogin.$isLogin);
+  const login = useStore(appService.$isLogin);
 
   useEffect(() => {
-    isLogin.setIsLogin(Boolean(sessionStorage.getItem("isLogin")));
+    appService.setIsLogin(Boolean(sessionStorage.getItem("isLogin")));
   }, []);
 
   return (
@@ -35,10 +35,10 @@ const App = () => {
             {!login && <Popup />}
           </Route>
           <Route path="/basket" component={Basket} />
-          <Route path="/itemCard" component={ItemCoffe} />
+          <Route path="/itemCard/:id" component={ItemCoffe} />
           <Route path="/catalog" component={Catalog} />
           <Route path="/contacts" component={Contacts} />
-          <Route path="/" component={Main} />
+          {/* <Route path="/" component={Main} /> */}
         </Switch>
       </Layout>
       <Footer />

@@ -8,7 +8,7 @@ import bg from "../../img/item-card/background.png";
 
 import { useForm } from "effector-forms";
 import { useEffect, useState } from "react";
-import { isLogin } from "../../services/app/appService";
+import { appService } from "../../services/app/appService";
 import { useHistory } from "react-router-dom";
 
 const Popup = () => {
@@ -103,7 +103,7 @@ const Popup = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     sessionStorage.setItem("isLogin", "true");
-                    isLogin.setIsLogin(true);
+                    appService.setIsLogin(true);
                     submit();
                   }}
                 />
