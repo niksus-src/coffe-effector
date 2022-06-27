@@ -15,6 +15,7 @@
     "effector": "^22.3.0",
     "effector-forms": "0.0.24",
     "effector-react": "^22.0.6",
+    "effector-storage": "^5.0.0",
     "local-cors-proxy": "^1.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -52,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.8"
+    "@types/react-slick": "^0.23.8",
+    "prettier": "^2.7.1"
   }
 }

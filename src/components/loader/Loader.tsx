@@ -1,5 +1,4 @@
 import "./loader.scss";
-
 import loader from "../../img/icons/loading.svg";
 
 const Loader = () => {

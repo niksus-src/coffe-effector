@@ -1,28 +1,28 @@
-import "./card.scss";
-import grain from "../../img/icons/grain.png";
-import coffe from "../../img/coffe/coffe.png";
+import './card.scss'
+import coffe from '../../img/coffe/coffe.png'
 
-import Button from "../button/button";
-import { useState } from "react";
+import Button from '../button/button'
+import React, { useState } from 'react'
+import { renderFeature, renderGrain } from '../../services/rendersElements'
 
 type Props = {
-  name: string;
-  roasting: number;
-  sourness: number;
-  bitterness: number;
-  saturation: number;
-  imgSrc: string;
-  sale: boolean;
-  classes: string;
-  textBtn: string;
-  linkTo: string;
+  name: string
+  roasting: number
+  sourness: number
+  bitterness: number
+  saturation: number
+  imgSrc: string
+  sale: boolean
+  classes?: string
+  textBtn: string
+  linkTo?: string
   price: {
-    [index: string]: number | null;
-  };
+    [index: string]: number
+  }
   oldPrice: {
-    [index: string]: number | null;
-  };
-};
+    [index: string]: number | null
+  }
+}
 
 const Card: React.FC<Props> = ({
   name,
@@ -32,99 +32,61 @@ const Card: React.FC<Props> = ({
   saturation,
   imgSrc = coffe,
   sale = false,
-  classes = "",
-  textBtn = "В корзину",
+  classes = '',
+  textBtn = 'В корзину',
   linkTo,
   price,
   oldPrice,
 }) => {
-  const [actualHeft, setActualHeft] = useState<string>("250");
-
-  const renderFeature = (amount: number = 1) => {
-    let renderElements = [];
-
-    for (let index = 0; index < amount; index++) {
-      renderElements.push(
-        <li key={index}>
-          <div className="active"></div>
-        </li>
-      );
-    }
-    if (amount !== 10) {
-      for (let index = amount; index < 10; index++) {
-        renderElements.push(
-          <li key={index}>
-            <div className="disable"></div>
-          </li>
-        );
-      }
-    }
-    return renderElements;
-  };
-
-  const renderGrain = (amount: number = 1) => {
-    let renderElements = [];
-
-    for (let index = 0; index <= amount; index++) {
-      renderElements.push(
-        <li key={index}>
-          <img src={grain} alt="grain" />
-        </li>
-      );
-    }
-    return renderElements;
-  };
+  const [actualHeft, setActualHeft] = useState<string>('250')
 
   return (
     <div className={`card ${classes}`} key={name}>
-      <div className="heft">
+      <div className='heft'>
         <select
-          name="heft"
-          id="heft"
+          name='heft'
+          id='heft'
           value={actualHeft}
           onChange={(e) => setActualHeft(e.target.value)}
         >
-          <option value="250">250 г.</option>
-          <option value="1000">1000 г.</option>
+          <option value='250'>250 г.</option>
+          <option value='1000'>1000 г.</option>
         </select>
       </div>
-      <div className="card-content">
-        <div className="card-img">
-          <img src={process.env.PUBLIC_URL + imgSrc} alt="coffe" />
+      <div className='card-content'>
+        <div className='card-img'>
+          <img src={process.env.PUBLIC_URL + imgSrc} alt='coffe' />
         </div>
-        <div className="card-feature">
-          <div className="card-grain">
+        <div className='card-feature'>
+          <div className='card-grain'>
             <ul>{renderGrain(roasting)}</ul>
           </div>
-          <div className="card-coffe-characteristic">
+          <div className='card-coffe-characteristic'>
             Кислинка
             <ul>{renderFeature(sourness)}</ul>
           </div>
-          <div className="card-coffe-characteristic">
+          <div className='card-coffe-characteristic'>
             Горчинка
             <ul>{renderFeature(bitterness)}</ul>
           </div>
-          <div className="card-coffe-characteristic">
+          <div className='card-coffe-characteristic'>
             Насыщенность
             <ul>{renderFeature(saturation)}</ul>
           </div>
         </div>
       </div>
-      <div className="card-title">{name}</div>
-      <div className="card-desc">
-        Свежеобжаренный кофе - описание товара, вкус, аромат
-      </div>
+      <div className='card-title'>{name}</div>
+      <div className='card-desc'>Свежеобжаренный кофе - описание товара, вкус, аромат</div>
 
-      <div className="card-footer">
-        <div className="price">
-          {price?.[actualHeft]} ₽
-          {sale && <div className="oldPrice">{oldPrice?.[actualHeft]} ₽</div>}
+      <div className='card-footer'>
+        <div className='price'>
+          {price[actualHeft]} ₽{sale && <div className='oldPrice'>{oldPrice[actualHeft]} ₽</div>}
         </div>
-        <Button text={textBtn} classes="card-btn" linkTo={linkTo} />
+        <Button text={textBtn} classes='card-btn' linkTo={linkTo} />
       </div>
-      {sale && <div className="sale">%</div>}
+      {sale && <div className='sale'>%</div>}
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

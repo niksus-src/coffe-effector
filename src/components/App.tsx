@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/itemCard/:id" component={ItemCoffe} />
           <Route path="/catalog" component={Catalog} />
           <Route path="/contacts" component={Contacts} />
-          {/* <Route path="/" component={Main} /> */}
+          <Route path="/" component={Main} />
         </Switch>
       </Layout>
       <Footer />

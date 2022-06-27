@@ -1,110 +1,112 @@
 @import "../../style/config.scss";
 
-.sales-wrapper{
-    margin-top: 200px;
-    padding: 0 100px;
+.sales-wrapper {
+  margin-top: 200px;
+  padding: 0 100px;
 }
 
-.sales-title{
-    font-size: 50px;
-    font-weight: bold;
+.sales-title {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: right;
+  &_desc {
+    margin-top: 50px;
     text-align: right;
-    &_desc{
-        margin-top: 50px;
-        text-align: right;
-        font-size: 25px;
-        font-weight: normal;
-        padding-left: 20%;
-    
-    }
+    font-size: 25px;
+    font-weight: normal;
+    padding-left: 20%;
+  }
 }
 
-.sales-bg{
-    background-image: url(../../img/sales-section/background.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: absolute;
-    left: 0;
-    width: 500px;
-    height: 800px;
-    z-index: -2;
+.sales-bg {
+  background-image: url(../../img/sales-section/background.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 0;
+  width: 500px;
+  height: 800px;
+  z-index: -2;
 }
 
-.sales-grain{
-    z-index: -2;
-    background-image: url(../../img/sales-section/grain.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 320px;
-    height: 750px;
-    position: absolute;
-    left: 0;
-    top: 850px;
+.sales-grain {
+  z-index: -2;
+  background-image: url(../../img/sales-section/grain.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 320px;
+  height: 750px;
+  position: absolute;
+  left: 0;
+  top: 850px;
 }
-.sales-cards-item{
-    padding: 50px 0;
-    max-width: 1300px;
+.sales-card {
+  padding: 0 10px;
+}
+.slick-list {
+  overflow: visible !important;
+}
+.sales-cards-item {
+  padding: 50px 0;
+  max-width: 1300px;
 }
 
 .slick-list {
-    max-width: 1300px;
-	will-change: transform;
+  max-width: 1300px;
+  will-change: transform;
 }
 
-.arrow{
-    border: none;
-    width: 70px;
-    height: 70px;
-    border-radius: 35px;
-    background-color: $accent;
-    transition: background-color .25s ease-in;
-    
-    &:hover{
-        background-color: $accent-hover;
-    }
+.arrow {
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: $accent;
+  transition: background-color 0.25s ease-in;
+
+  &:hover {
+    background-color: $accent-hover;
+  }
 }
 
-.arrow-right{
-    position: absolute;
-    right: 0;
-    transform: rotate(180deg);
-    z-index: 20;
+.arrow-right {
+  position: absolute;
+  right: 0;
+  transform: rotate(180deg);
+  z-index: 20;
 }
 
-.arrow-left{
-    position: absolute;
-    left: 0;
-    z-index: 20;
+.arrow-left {
+  position: absolute;
+  left: 0;
+  z-index: 20;
 }
 
-.slick-slider{
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.slick-slider {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 //MEDIA
 @media (max-width: 1110px) {
-
 }
 
 @media (max-width: 1000px) {
-
 }
 
 @media (max-width: 769px) {
-
 }
 
 @media (max-width: 426px) {
-    .sales-bg{
-        width: auto;
-    }
-    .sales-wrapper{
-        padding: 0; 
-    }
-    .sales-title{
-        padding: 0 20px;
-    }
+  .sales-bg {
+    width: auto;
+  }
+  .sales-wrapper {
+    padding: 0;
+  }
+  .sales-title {
+    padding: 0 20px;
+  }
 }

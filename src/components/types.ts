@@ -1,38 +1,110 @@
 export type coffeType = {
-  length: number;
-  data: Array<Coffe> | never[];
-};
+  length: number
+  data: Array<Coffe> | never[]
+}
 
 export type Coffe = {
-  _id: string;
-  name: string;
-  desc: string;
-  geography: string;
-  sourness: number;
-  special: string;
-  kind: string;
-  sale: boolean;
-  roasting: number;
-  bitterness: number;
-  saturation: number;
-  imgSrc: string;
-  taste: Array<string>;
-  processing: string;
-  manufacturer: string;
-  sournessDegree: string;
+  _id: string
+  name: string
+  desc: string
+  geography: string
+  sourness: number
+  special: string
+  kind: string
+  sale: boolean
+  roasting: number
+  bitterness: number
+  saturation: number
+  imgSrc: string
+  taste: Array<string>
+  processing: string
+  manufacturer: string
+  sournessDegree: string
   price: {
-    [index: string]: number;
-  };
+    [index: string]: number
+  }
   oldPrice: {
-    [index: string]: number | null;
-  };
-};
+    [index: string]: number | null
+  }
+}
 
 export type Filters = {
-  roasting: string | null;
-  geography: string | null;
-  sourness: string | null;
-  special: string | null;
-  kind: string | null;
-  allAny: boolean;
-};
+  roasting: string | null
+  geography: string | null
+  sourness: string | null
+  special: string | null
+  kind: string | null
+  allAny: boolean
+}
+
+export type Account = {
+  name: string
+  mail: string
+  phone: string
+  password: string
+}
+
+export type Login = {
+  mail: string
+  password: string
+}
+
+export type loginRes = {
+  login: boolean
+  error: string | null
+  id: string
+  data: {
+    name: string
+    mail: string
+    phone: string
+    password: string
+    discount: number
+    orders: [
+      {
+        date: string
+        status: string
+        total: number
+        products: [
+          {
+            amount: number
+            productName: string
+            heft: number
+            price: number
+          }
+        ]
+      }
+    ]
+  } | null
+}
+
+export type Products = {
+  amount: number
+  productName: string
+  heft: number
+  price: number
+}[]
+
+export type Basket = {
+  id: string
+  imgSrc: string
+  name: string
+  heft: string
+  amount: number
+  price: number
+}[]
+
+export type BasketItem = {
+  id: string
+  imgSrc: string
+  name: string
+  heft: string
+  amount: number
+  price: number
+  discount: number
+  changeFn: (id: string, count: number) => void
+}
+
+export type ChangeCountBasket = {
+  id: string
+  amount: number
+}

@@ -1,94 +1,168 @@
-import {
-  createStore,
-  createEvent,
-  createEffect,
-  forward,
-  sample,
-} from "effector";
-import axios from "axios";
-import { api } from "../api";
+import { createStore, createEvent, createEffect, forward } from 'effector'
+import { api } from '../api'
 
-import { Coffe, coffeType } from "../../components/types";
+import { Account, Coffe, coffeType, Login, loginRes } from '../../components/types'
+import { ChangeEvent } from 'react'
 
 //ISLOGIN
-const $isLogin = createStore(false);
+const $isLogin = createStore(false)
 
-const setIsLogin = createEvent<boolean>();
+const setIsLogin = createEvent<boolean>()
 
-$isLogin.on(setIsLogin, (_, payload) => payload);
-$isLogin.watch((state) => console.log(state));
+$isLogin.on(setIsLogin, (_, payload) => payload)
+$isLogin.watch((state) => console.log('isLogin', state))
 
 //COFFES FETCH
 const initStateCoffes = {
   length: 0,
   data: [],
-};
-const $coffes = createStore<coffeType>(initStateCoffes);
-const $coffe = createStore<Coffe | null>(null);
+}
+const $coffes = createStore<coffeType>(initStateCoffes)
+const $foundCoffes = createStore<coffeType>(initStateCoffes)
+const $coffe = createStore<Coffe | null>(null)
 
-const $offset = createStore<number>(6);
-const $isLoading = createStore(true);
+const $offset = createStore<number>(6)
+const $isLoading = createStore(true)
 
-const fetchCoffesFx = createEffect({ handler: fetchCoffes });
-const fetchCoffeFx = createEffect({ handler: fetchCoffe });
+const fetchCoffesFx = createEffect({ handler: fetchCoffes })
+const fetchCoffeFx = createEffect({ handler: fetchCoffe })
+const fetchFoundCoffesFx = createEffect({ handler: fetchSearch })
 
-const fetchCoffesOffset = createEvent();
-const fetchCoffeById = createEvent<string>();
-const setLoading = createEvent<boolean>();
-const setOffset = createEvent<number>();
+const fetchCoffesOffset = createEvent()
+const fetchCoffeById = createEvent<string>()
+const fetchFoundCoffes = createEvent<string>()
+const setLoading = createEvent<boolean>()
+const setOffset = createEvent<number>()
 
-$coffes.on(fetchCoffesFx.doneData, (_, payload) => payload);
-$coffe.on(fetchCoffeFx.doneData, (_, payload) => payload);
+$coffes.on(fetchCoffesFx.doneData, (_, payload) => payload)
+$coffe.on(fetchCoffeFx.doneData, (_, payload) => payload)
+
+$foundCoffes.on(fetchFoundCoffesFx.doneData, (_, payload) => payload)
 
 $isLoading.on(setLoading, (_, payload) => {
-  return payload;
-});
+  return payload
+})
 
 $offset.on(setOffset, (_, payload) => {
-  return payload;
-});
+  return payload
+})
 
-$coffes.watch((state) => console.log("coffes: ", state));
+$coffes.watch((state) => console.log('coffes: ', state))
 
-$isLoading.watch((state) => console.log("isloading: ", state));
+$isLoading.watch((state) => console.log('isloading: ', state))
 
-$offset.watch((state) => console.log("offset: ", state));
+$offset.watch((state) => console.log('offset: ', state))
 
 forward({
   from: fetchCoffesOffset,
   to: fetchCoffesFx,
-});
+})
 
 forward({
   from: fetchCoffeById,
   to: fetchCoffeFx,
-});
+})
+
+forward({
+  from: fetchFoundCoffes,
+  to: fetchFoundCoffesFx,
+})
+
+//ACCOUNTS FETCH
+
+const $registerResult = createStore<string | null>(null)
+const $loginResult = createStore<loginRes | null>(null)
+
+const registerEvent = createEvent<Account>()
+const fetchRegisterFx = createEffect({ handler: fetchRegister })
+
+const loginEvent = createEvent<Login>()
+const fetchLoginFx = createEffect({ handler: fetchLogin })
+
+$registerResult.on(fetchRegisterFx.doneData, (_, payload) => payload)
+$registerResult.watch((state) => console.log(state))
+
+$loginResult.on(fetchLoginFx.doneData, (_, payload) => payload)
+$loginResult.watch((state) => console.log(state))
+
+forward({
+  from: registerEvent,
+  to: fetchRegisterFx,
+})
+
+forward({
+  from: loginEvent,
+  to: fetchLoginFx,
+})
 
 //Async
 
 async function fetchCoffes() {
-  const res = await api.get(`/products-coffe`);
+  const res = await api.get(`/products-coffe`)
 
-  setLoading(false);
-  return res.data;
+  setLoading(false)
+  return res.data
 }
 
-async function fetchCoffe(id: any) {
-  const res = await api.get(`/products-coffe/${id}`);
+async function fetchCoffe(id: string) {
+  setLoading(true)
+  const res = await api.get(`/products-coffe/${id}`)
 
-  setLoading(false);
-  return res.data;
+  setLoading(false)
+  return res.data
+}
+
+async function fetchSearch(search: string) {
+  setLoading(true)
+  const res = await api.get(`/products-coffe/search/${search}`)
+
+  setLoading(false)
+  return res.data
+}
+
+async function fetchRegister(account: Account) {
+  setLoading(true)
+  const res = await api.post(`/accounts/register`, account)
+  setLoading(false)
+  return res.data
+}
+
+async function fetchLogin(accountData: Login) {
+  setLoading(true)
+  const res = await api.post(`/accounts/login`, accountData)
+  setLoading(false)
+  sessionStorage.setItem('isLogin', 'true')
+  setIsLogin(true)
+  return res.data
+}
+
+const handlerCount = (increase: number, count: number, setCount: (amount: number) => void) => {
+  if ((count === 1 && increase < 1) || (count > 98 && increase > 0)) return
+  setCount(count + increase)
+}
+
+const changeCount = (e: ChangeEvent<HTMLInputElement>, setCount: (amount: number) => void) => {
+  const target = e.target.value
+  if (target.match(/^\d+$/) !== null && +target < 100) setCount(+target)
 }
 
 export const appService = {
+  handlerCount,
+  changeCount,
   fetchCoffeById,
   setIsLogin,
   fetchCoffesOffset,
   setOffset,
   setLoading,
+  fetchFoundCoffes,
+  registerEvent,
+  loginEvent,
   $coffes,
   $isLoading,
   $offset,
   $isLogin,
   $coffe,
-};
+  $foundCoffes,
+  $registerResult,
+  $loginResult,
+}

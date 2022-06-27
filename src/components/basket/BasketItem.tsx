@@ -1,56 +1,79 @@
-import "./basketItem.scss";
-import coffe from "../../img/coffe/blen-gurme.jpg";
-import CustomLink from "../customLink/customLink";
-import { ChangeEvent, useState } from "react";
+import './basketItem.scss'
+import CustomLink from '../customLink/customLink'
+import React, { useEffect, useState } from 'react'
+import { BasketItem } from '../types'
+import { basketService } from '../../services/basket/basketService'
+import { appService } from '../../services/app/appService'
 
-const BasketItem = () => {
-  const [count, setCount] = useState(1);
-  const handlerCount = (increase: number) => {
-    if ((count === 1 && increase < 1) || (count > 98 && increase > 0)) return;
-    setCount(count + increase);
-  };
+const BasketElem: React.FC<BasketItem> = ({
+  id,
+  imgSrc,
+  name,
+  heft,
+  amount,
+  price,
+  discount,
+  changeFn,
+}) => {
+  const [count, setCount] = useState(amount)
 
-  const changeCount = (e: ChangeEvent<HTMLInputElement>) => {
-    const target = e.target.value;
-    if (target.match(/^\d+$/) !== null && +target < 100) setCount(+target);
-  };
+  useEffect(() => {
+    changeFn(id, count)
+  }, [count])
+
+  const transformLink = (link: string) => {
+    return link.split('/')[0]
+  }
+
   return (
-    <tr className="basket-item">
+    <>
       <td>
-        <button className="basket-item-del_item">&#10006;</button>
+        <button className='basket-item-del_item' onClick={() => basketService.delItem(id)}>
+          &#10006;
+        </button>
       </td>
       <td>
-        <div className="basket-item-main">
-          <img src={coffe} alt="coffe" className="basket-item-main-img"></img>
-          <div className="basket-item-main-text">
-            <CustomLink to="/itemCard" classes="basket-item-main-text-title">
-              Columbia Supremo
+        <div className='basket-item-main'>
+          <img
+            src={process.env.PUBLIC_URL + imgSrc}
+            alt='coffe'
+            className='basket-item-main-img'
+          ></img>
+          <div className='basket-item-main-text'>
+            <CustomLink to={`/itemCard/${transformLink(id)}`} classes='basket-item-main-text-title'>
+              {name}
             </CustomLink>
-            <div className="basket-item-main-text-heft">250 г.</div>
+            <div className='basket-item-main-text-heft'>{heft} г.</div>
           </div>
         </div>
       </td>
-      <td>270 ₽ </td>
-      <td className="basket-item-amount">
-        <div className="counter">
-          <button className="counter-btn" onClick={() => handlerCount(-1)}>
+      <td>{price} ₽ </td>
+      <td className='basket-item-amount'>
+        <div className='counter'>
+          <button
+            className='counter-btn'
+            onClick={() => appService.handlerCount(-1, count, setCount)}
+          >
             -
           </button>
           <input
-            type="text"
-            className="counter-number"
+            type='text'
+            className='counter-number'
             value={count}
-            onChange={(e) => changeCount(e)}
+            onChange={(e) => appService.changeCount(e, setCount)}
           />
-          <button className="counter-btn" onClick={() => handlerCount(1)}>
+          <button
+            className='counter-btn'
+            onClick={() => appService.handlerCount(1, count, setCount)}
+          >
             +
           </button>
         </div>
       </td>
-      <td>27 ₽ </td>
-      <td>243 ₽ </td>
-    </tr>
-  );
-};
+      <td>{((price * discount) / 100) * count} ₽ </td>
+      <td>{price * count - ((price * discount) / 100) * count} ₽ </td>
+    </>
+  )
+}
 
-export default BasketItem
+export default BasketElem

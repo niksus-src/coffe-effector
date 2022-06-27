@@ -1,5 +1,6 @@
 import { createForm, Rule } from "effector-forms";
-
+import {forward} from "effector";
+import { appService } from '../app/appService'
 const rules = {
   required: (): Rule<string> => ({
     name: "required",
