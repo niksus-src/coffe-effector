@@ -5,7 +5,7 @@ import './account.scss'
 import personalImg from '../../img/account/personalLogo.png'
 import { appService } from '../../services/app/appService'
 import { useStore } from 'effector-react'
-import { loginRes, Products } from '../types'
+import { loginRes, Order, Products } from '../types'
 import { allTotal, nextDiscount } from '../../services/account/accountService'
 
 const Account = () => {
@@ -16,7 +16,8 @@ const Account = () => {
 
   useEffect(() => {
     if ((loginRes && !loginRes.login) || loginRes === null) {
-      sessionStorage.clear()
+      console.log('un')
+      sessionStorage.setItem('isLogin', 'false')
       history.push('/account')
       appService.setIsLogin(false)
     }
@@ -25,7 +26,7 @@ const Account = () => {
   const lacksDiscount: { [index: string]: number } = {
     '10': 5000,
     '15': 7000,
-    '20': 1000,
+    '20': 10000,
   }
 
   return (
@@ -69,17 +70,22 @@ const Account = () => {
                 Ваша скидка: {loginRes && loginRes.data && loginRes.data.discount}%
               </div>
               <div className='account-top-sale-desc'>Сумма заказов: {allTotal()} ₽*</div>
-              <div className='account-top-sale-ps'>
-                *До скидки {nextDiscount()}% не хватает покупок на сумму:{' '}
-                {lacksDiscount[nextDiscount()] - allTotal()!} ₽
-              </div>
+              {loginRes!.data.discount !== 20 && (
+                <div className='account-top-sale-ps'>
+                  *До скидки {nextDiscount()}% не хватает покупок на сумму:{' '}
+                  {lacksDiscount[nextDiscount()] - allTotal()!} ₽
+                </div>
+              )}
             </div>
           )}
           {isOpenSpec && (
             <div className='account-top-sale-specification swing-in-top-fwd'>
-              <div className='account-top-sale-specification-title'>
-                До скидки 15% не хватает покупок на сумму: 1255 ₽
-              </div>
+              {loginRes!.data.discount !== 20 && (
+                <div className='account-top-sale-specification-title'>
+                  До скидки {nextDiscount()}% не хватает покупок на сумму:
+                  {lacksDiscount[nextDiscount()] - allTotal()!} ₽
+                </div>
+              )}
               <div className='account-top-sale-specification-desc'>
                 Скидка 10% - сумма покупок 5000 ₽
               </div>
@@ -121,7 +127,9 @@ const Account = () => {
             Завершенные
           </button>
         </div>
-        {isCurrentBtn === 'current' ? currentBlock(loginRes) : completedBlock(loginRes)}
+        {isCurrentBtn === 'current'
+          ? currentBlock(loginRes!)
+          : currentBlock(loginRes!, 'доставлено')}
       </div>
       <div className='account-footer'>
         <div className='account-footer-personal_shares'>
@@ -133,91 +141,61 @@ const Account = () => {
   )
 }
 
-const currentBlock = (loginRes: loginRes | null) => {
+const currentBlock = (loginRes: loginRes, status = '') => {
+  const filterItems = loginRes.data.orders.filter((order) =>
+    status === '' ? order.status !== 'доставлено' : order.status === 'доставлено'
+  )
+  const renderfilterItems = filterItems.map((order, i) => {
+    return (
+      <div key={i}>
+        <div className='account-main-status'>
+          {order.date} - {order.status}
+        </div>
+        <div className='account-main-products'>
+          <table>
+            <thead>
+              <tr className='account-main-products-title'>
+                <td>Товары:</td>
+                <td>Стоимость за единицу:</td>
+                <td>Скидка на единицу:</td>
+                <td>Итоговая стоимость за товар:</td>
+              </tr>
+            </thead>
+            <tbody>{productsItem(order)}</tbody>
+          </table>
+        </div>
+        <div className='account-main-total'>
+          Сумма заказа: {order.total} ₽
+          <br />
+          Доставка: 350 ₽
+        </div>
+      </div>
+    )
+  })
   return (
-    <>
-      {loginRes &&
-        loginRes.data &&
-        loginRes.data.orders.map((order, i) => {
-          if (order.status !== 'доставлено')
-            return (
-              <div key={i}>
-                <div className='account-main-status'>
-                  {order.date} - {order.status}
-                </div>
-                <div className='account-main-products'>
-                  <table>
-                    <thead>
-                      <tr className='account-main-products-title'>
-                        <td>Товаров:</td>
-                        <td>Сумма заказа:</td>
-                        <td>Скидка ({loginRes.data?.discount}%):</td>
-                        <td>Сумма заказа:</td>
-                      </tr>
-                    </thead>
-                    <tbody>{productsItem(order.products, loginRes.data?.discount)}</tbody>
-                  </table>
-                </div>
-                <div className='account-main-total'>
-                  Сумма заказа: {order.total} ₽
-                  <br />
-                  Доставка: 350 ₽
-                </div>
-              </div>
-            )
-        })}
-    </>
+    <>{renderfilterItems.length > 0 ? renderfilterItems : <div className='empty'>Пусто</div>}</>
   )
 }
 
-const completedBlock = (loginRes: loginRes | null) => {
-  return (
-    <>
-      {loginRes &&
-        loginRes.data &&
-        loginRes.data.orders.map((order, i) => {
-          if (order.status === 'доставлено') {
-            return (
-              <div key={i}>
-                <div className='account-main-status'>
-                  {order.date} - {order.status}
-                </div>
-                <div className='account-main-products'>
-                  <table>
-                    <thead>
-                      <tr className='account-main-products-title'>
-                        <td>Товаров:</td>
-                        <td>Сумма заказа:</td>
-                        <td>Скидка ({loginRes.data?.discount}%):</td>
-                        <td>Сумма заказа:</td>
-                      </tr>
-                    </thead>
-                    <tbody>{productsItem(order.products, loginRes.data?.discount)}</tbody>
-                  </table>
-                </div>
-                <div className='account-main-total'>
-                  Сумма заказа: {order.total} ₽
-                  <br />
-                  Доставка: 350 ₽
-                </div>
-              </div>
-            )
-          }
-        })}
-    </>
-  )
-}
-
-const productsItem = (products: Products, discount: number | undefined) => {
-  const actDiscount = discount !== undefined ? discount : 1
-  return products.map((product, i) => (
+const productsItem = (order: {
+  discount: number
+  products: Array<{
+    amount: number
+    productName: string
+    heft: number
+    price: number
+  }>
+}) => {
+  return order.products.map((product, i) => (
     <tr className='account-main-products-item' key={i}>
       <td>
         {product.amount} х {product.productName}, {product.heft} г.
       </td>
       <td>{product.price} ₽</td>
-      <td>{(product.price * actDiscount) / 100} ₽</td>
-      <td>{product.price - (product.price * actDiscount) / 100} ₽</td>
+      <td>{(product.price * order.discount) / 100} ₽</td>
+      <td>
+        {((product.price - (product.price * order.discount) / 100) * product.amount).toFixed(2)} ₽
+      </td>
     </tr>
   ))
 }

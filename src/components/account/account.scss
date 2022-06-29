@@ -14,7 +14,13 @@
     }
   }
 }
-
+.empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c4c4c4;
+  font-size: 20px;
+}
 .account-wrapper {
   background-image: url(../../img/account/bg.png);
   background-position: top center;
@@ -208,18 +214,16 @@
   height: 450px;
   border-radius: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   flex-direction: column;
   padding: 20px 30px;
   color: #fff;
 
   &-title {
     font-size: 28px;
-    margin-bottom: 40%;
   }
   &-term {
     font-size: 16px;
-    margin-bottom: 10%;
   }
 }
 

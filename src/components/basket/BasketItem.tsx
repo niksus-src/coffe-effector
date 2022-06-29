@@ -5,20 +5,11 @@ import { BasketItem } from '../types'
 import { basketService } from '../../services/basket/basketService'
 import { appService } from '../../services/app/appService'
 
-const BasketElem: React.FC<BasketItem> = ({
-  id,
-  imgSrc,
-  name,
-  heft,
-  amount,
-  price,
-  discount,
-  changeFn,
-}) => {
+const BasketElem: React.FC<BasketItem> = ({ id, imgSrc, name, heft, amount, price, discount }) => {
   const [count, setCount] = useState(amount)
 
   useEffect(() => {
-    changeFn(id, count)
+    basketService.changeCountItem(id, count)
   }, [count])
 
   const transformLink = (link: string) => {

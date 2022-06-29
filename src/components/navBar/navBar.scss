@@ -47,7 +47,6 @@ nav{
 .nav-icons{
     display: flex;
     align-items: center;
-    fill:inherit; stroke:inherit;
     & div:not(:first-child){
         margin-left: 50px;
     }
@@ -61,6 +60,21 @@ nav{
 
 .icon{
     cursor: pointer;
+    position: relative;
+}
+
+.count-basket{
+    position: absolute;
+    right: -30%;
+    top: -35%;
+    width: 50%;
+    height: 50%;
+    background-color: $accent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    font-size: 12px;
 }
 
 //MEDIA

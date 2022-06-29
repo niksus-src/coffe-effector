@@ -1,100 +1,91 @@
-import { createForm, Rule } from "effector-forms";
+import { createForm, Rule } from 'effector-forms'
 
 const rules = {
   required: (): Rule<string> => ({
-    name: "required",
+    name: 'required',
     validator: (value) => {
       return {
         isValid: Boolean(value),
-        errorText: "Пустое поле",
-      };
+        errorText: 'Пустое поле',
+      }
     },
   }),
   phone: (): Rule<string> => ({
-    name: "phone",
+    name: 'phone',
     validator: (value) => ({
-      isValid: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(
-        value
-      ),
-      errorText: "Введите номер телефона",
+      isValid: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(value),
+      errorText: 'Введите номер телефона',
     }),
   }),
   mail: (): Rule<string> => ({
-    name: "phone",
+    name: 'phone',
     validator: (value) => ({
-      isValid:
-        /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(
-          value
-        ),
-      errorText: "Введите почту",
+      isValid: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(value),
+      errorText: 'Введите почту',
     }),
   }),
   allString: (): Rule<string> => ({
-    name: "allString",
+    name: 'allString',
     validator: (value) => {
       return {
         isValid: !/\d/.test(value),
-        errorText: "allString",
-      };
+        errorText: 'allString',
+      }
     },
   }),
   allNumbers: (): Rule<string> => ({
-    name: "allNumbers",
+    name: 'allNumbers',
     validator: (value) => {
       return {
         isValid: !/[^0-9]/.test(value),
-        errorText: "allNumbers",
-      };
+        errorText: 'allNumbers',
+      }
     },
   }),
-};
+}
 
 const deliveryForm = createForm({
   fields: {
     name: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.allString()],
     },
     surname: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.allString()],
     },
     phone: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.phone()],
     },
     mail: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.mail()],
     },
     nameCompany: {
-      init: "",
+      init: '',
     },
     country: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.allString()],
     },
     city: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.allString()],
     },
     streetHome: {
-      init: "",
+      init: '',
       rules: [rules.required()],
     },
     postcode: {
-      init: "",
+      init: '',
       rules: [rules.required(), rules.allNumbers()],
     },
     comment: {
-      init: "",
+      init: '',
     },
   },
-  validateOn: ["submit"],
-});
+  validateOn: ['submit'],
+})
 
-deliveryForm.$values.watch((state) => console.log(state));
-
-
-
-export default deliveryForm;
+export default deliveryForm

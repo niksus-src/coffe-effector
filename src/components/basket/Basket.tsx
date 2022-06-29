@@ -1,6 +1,6 @@
 import './basket.scss'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import BasketElem from './BasketItem'
 import deliveryForm from '../../services/basket/deliveryService'
 import { useForm } from 'effector-forms'
@@ -9,10 +9,17 @@ import { basketService } from '../../services/basket/basketService'
 import masterCard from '../../img/icons/mastercard.png'
 import visa from '../../img/icons/visa.png'
 import { useStore } from 'effector-react'
+import { appService } from '../../services/app/appService'
+import Popup from '../popup/popup'
+import { useState } from 'react'
 
 const Basket = () => {
   const { fields, hasError, errorText, submit } = useForm(deliveryForm)
+  const [showPopup, setShowPopup] = useState(false)
   const basket = useStore(basketService.$basket)
+  const login = useStore(appService.$loginResult)
+  const resAddOrder = useStore(basketService.$resAddOrder)
+  const history = useHistory()
 
   const renderItems = () => {
     if (basket !== null)
@@ -25,8 +32,7 @@ const Basket = () => {
             heft={item.heft}
             amount={item.amount}
             price={item.price}
-            discount={10}
-            changeFn={() => basketService.changeCountItem}
+            discount={login ? login.data.discount : 0}
           />
         </tr>
       ))
@@ -35,7 +41,7 @@ const Basket = () => {
   const transformText = (value: number) => {
     const words = ['товар', 'товара', 'товаров']
     value = Math.abs(value) % 100
-    var num = value % 10
+    let num = value % 10
     if (value > 10 && value < 20) return words[2]
     if (num > 1 && num < 5) return words[1]
     if (num === 1) return words[0]
@@ -75,7 +81,7 @@ const Basket = () => {
                       <td>Наименование товара</td>
                       <td>Цена</td>
                       <td>Количество</td>
-                      <td>Скидка (10%)</td>
+                      <td>Скидка ({login ? login.data.discount : '0'}%)</td>
                       <td>Итого</td>
                     </tr>
                   </thead>
@@ -246,22 +252,45 @@ const Basket = () => {
           </div>
           <div className='block-wrapper basket-footer-payment'>
             <div className='basket-footer-payment-title'>
-              <div className='basket-footer-payment-title-text'>Итог: 486 ₽</div>
+              <div className='basket-footer-payment-title-text'>
+                Итог:
+                {basketService.allTotal() -
+                  basketService.allTotal() * (login ? login.data.discount / 100 : 0)}
+                ₽
+              </div>
               <div className='basket-footer-payment-title-img'>
                 <img src={masterCard} alt='masterCard' />
                 <img src={visa} alt='visa' />
               </div>
             </div>
             <div className='basket-footer-payment-desc'>
-              Подытог: 540 ₽ <br /> Скидка: 54 ₽ (10%)
+              Подытог: {basketService.allTotal()} ₽ <br /> Скидка:
+              {basketService.allTotal() * (login ? login.data.discount / 100 : 0)} ₽ (
+              {login ? login.data.discount : '0'}%)
             </div>
-            <button className='basket-footer-payment-btn'>Оплатить заказ</button>
+            <button
+              className='basket-footer-payment-btn'
+              onClick={() => {
+                if (!login) setShowPopup(true)
+                else {
+                  basketService.addOrderEvent({
+                    id: login.id,
+                    basket,
+                    discount: login.data.discount,
+                  })
+                  basketService.delAllItem()
+                }
+              }}
+            >
+              Оплатить заказ
+            </button>
             <div className='basket-footer-payment-footer'>
               Ваши персональные данные будут использоваться для управления доступом к вашей учетной
               записи и для других целей, описанных в нашем документе политика конфиденциальности.
             </div>
           </div>
         </div>
+        {showPopup && <Popup setShowPopup={setShowPopup} />}
       </div>
     </div>
   )

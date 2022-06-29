@@ -59,22 +59,16 @@ export type loginRes = {
     phone: string
     password: string
     discount: number
-    orders: [
-      {
-        date: string
-        status: string
-        total: number
-        products: [
-          {
-            amount: number
-            productName: string
-            heft: number
-            price: number
-          }
-        ]
-      }
-    ]
-  } | null
+    orders: Array<accountOrder>
+  }
+}
+
+export type accountOrder = {
+  date: string
+  status: string
+  total: number
+  discount: number
+  products: Products
 }
 
 export type Products = {
@@ -101,10 +95,20 @@ export type BasketItem = {
   amount: number
   price: number
   discount: number
-  changeFn: (id: string, count: number) => void
 }
 
 export type ChangeCountBasket = {
   id: string
   amount: number
+}
+
+export type Order = {
+  id: string
+  discount: number
+  products: Array<{
+    amount: number
+    productName: string
+    heft: number
+    price: number
+  }>
 }

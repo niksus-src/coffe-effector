@@ -1,4 +1,4 @@
-import { createStore, createEvent, createEffect, forward } from 'effector'
+import { createStore, createEvent, createEffect, forward, sample, guard } from 'effector'
 import { api } from '../api'
 
 import { Account, Coffe, coffeType, Login, loginRes } from '../../components/types'
@@ -78,11 +78,34 @@ const fetchRegisterFx = createEffect({ handler: fetchRegister })
 
 const loginEvent = createEvent<Login>()
 const fetchLoginFx = createEffect({ handler: fetchLogin })
+const fetchOrdersFx = createEffect({ handler: fetchOrders })
+
+const ordersEvent = createEvent<string>()
 
 $registerResult.on(fetchRegisterFx.doneData, (_, payload) => payload)
 $registerResult.watch((state) => console.log(state))
 
 $loginResult.on(fetchLoginFx.doneData, (_, payload) => payload)
+// $loginResult.on(fetchOrdersFx.doneData, (state, payload) => {
+//   const newLoginRes: loginRes = {
+//       ...state!,
+//     data: { ...state!.data!, orders: payload },
+//   }
+//   console.log(newLoginRes)
+//   return newLoginRes
+// })
+
+const notNull = <T>(payload: T): payload is Exclude<T, null> => payload !== null
+
+sample({
+  source: guard({
+    source: $loginResult,
+    filter: notNull,
+  }),
+  clock: fetchOrdersFx.doneData,
+  fn: (state, clock) => ({ ...state, data: { ...state.data, orders: clock } }),
+  target: $loginResult,
+})
 $loginResult.watch((state) => console.log(state))
 
 forward({
@@ -93,6 +116,10 @@ forward({
 forward({
   from: loginEvent,
   to: fetchLoginFx,
+})
+forward({
+  from: ordersEvent,
+  to: fetchOrdersFx,
 })
 
 //Async
@@ -122,7 +149,7 @@ async function fetchSearch(search: string) {
 
 async function fetchRegister(account: Account) {
   setLoading(true)
-  const res = await api.post(`/accounts/register`, account)
+  const res = await api.post(`/accounts/register`, { ...account, discount: 0 })
   setLoading(false)
   return res.data
 }
@@ -131,8 +158,12 @@ async function fetchLogin(accountData: Login) {
   setLoading(true)
   const res = await api.post(`/accounts/login`, accountData)
   setLoading(false)
-  sessionStorage.setItem('isLogin', 'true')
-  setIsLogin(true)
+  res.data.login && setIsLogin(true)
+  return res.data
+}
+
+async function fetchOrders(id: string) {
+  const res = await api.get(`/accounts/getOrders/${id}`)
   return res.data
 }
 
@@ -147,6 +178,7 @@ const changeCount = (e: ChangeEvent<HTMLInputElement>, setCount: (amount: number
 }
 
 export const appService = {
+  ordersEvent,
   handlerCount,
   changeCount,
   fetchCoffeById,
