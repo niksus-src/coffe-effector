@@ -1,6 +1,6 @@
 import './basket.scss'
 
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import BasketElem from './BasketItem'
 import deliveryForm from '../../services/basket/deliveryService'
 import { useForm } from 'effector-forms'
@@ -18,8 +18,7 @@ const Basket = () => {
   const [showPopup, setShowPopup] = useState(false)
   const basket = useStore(basketService.$basket)
   const login = useStore(appService.$loginResult)
-  const resAddOrder = useStore(basketService.$resAddOrder)
-  const history = useHistory()
+  const allTotal = useStore(basketService.$allTotal)
 
   const renderItems = () => {
     if (basket !== null)
@@ -254,9 +253,7 @@ const Basket = () => {
             <div className='basket-footer-payment-title'>
               <div className='basket-footer-payment-title-text'>
                 Итог:
-                {basketService.allTotal() -
-                  basketService.allTotal() * (login ? login.data.discount / 100 : 0)}
-                ₽
+                {allTotal - allTotal * (login ? login.data.discount / 100 : 0)}₽
               </div>
               <div className='basket-footer-payment-title-img'>
                 <img src={masterCard} alt='masterCard' />
@@ -264,8 +261,8 @@ const Basket = () => {
               </div>
             </div>
             <div className='basket-footer-payment-desc'>
-              Подытог: {basketService.allTotal()} ₽ <br /> Скидка:
-              {basketService.allTotal() * (login ? login.data.discount / 100 : 0)} ₽ (
+              Подытог: {allTotal} ₽ <br /> Скидка:
+              {allTotal * (login ? login.data.discount / 100 : 0)} ₽ (
               {login ? login.data.discount : '0'}%)
             </div>
             <button

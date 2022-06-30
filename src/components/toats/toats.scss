@@ -1,0 +1,78 @@
+@import "../../style/config.scss";
+
+.toats-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $accent;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+.hide {
+  display: none;
+}
+.toats{
+  &-status {
+  }
+  .status-success {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    background-color: #008f33;
+    height: 10px;
+  }
+  &-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    &-desc{
+      font-size: 16px;
+    }
+    &-close{
+      font-size: 26px;
+      margin-left: 10px;
+      transition: color .25s ease-in;
+      cursor: pointer;
+      &:hover {
+        color: #b63232;
+      }
+    }
+  }
+
+}
+.fade-in {
+  display: block;
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.fade-out {
+  -webkit-animation: fade-out 1s ease-out both;
+  animation: fade-out 1s ease-out both;
+
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+

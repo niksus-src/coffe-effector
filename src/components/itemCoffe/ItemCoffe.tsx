@@ -9,6 +9,7 @@ import { appService } from '../../services/app/appService'
 import { useStore } from 'effector-react'
 import { basketService } from '../../services/basket/basketService'
 import { renderFeature, renderGrain } from '../../services/rendersElements'
+import Toats from '../toats/toats'
 
 type Params = {
   id: string
@@ -23,7 +24,8 @@ const CoffeNames: { [index: string]: string } = {
 const ItemCoffe = () => {
   const [count, setCount] = useState(1)
   const [actualHeft, setActualHeft] = useState('250')
-
+  const [showToats, setShowToats] = useState(false)
+  console.log(showToats)
   const { id } = useParams<Params>()
 
   useEffect(() => {
@@ -36,6 +38,10 @@ const ItemCoffe = () => {
 
   return (
     <>
+      {showToats && (
+        <Toats desc='Товар успешно добавлен в корзину' show={showToats} setShow={setShowToats} />
+      )}
+
       {!coffe ? (
         <div className='item not-found'>Ничего не найдено</div>
       ) : (
@@ -95,7 +101,9 @@ const ItemCoffe = () => {
                   <div className='counter'>
                     <button
                       className='counter-btn'
-                      onClick={() => appService.handlerCount(-1, count, setCount)}
+                      onClick={() => {
+                        appService.handlerCount(-1, count, setCount)
+                      }}
                     >
                       -
                     </button>
@@ -115,7 +123,10 @@ const ItemCoffe = () => {
                   <Button
                     text={`Купить за ${actualPrice} ₽`}
                     classes='buy-btn'
-                    fn={() => basketService.insertItemFn(coffe, count, actualHeft)}
+                    fn={() => {
+                      basketService.insertItem({ coffe, count, actualHeft })
+                      setShowToats(true)
+                    }}
                   />
                 </div>
               </div>

@@ -9,7 +9,7 @@ const BasketElem: React.FC<BasketItem> = ({ id, imgSrc, name, heft, amount, pric
   const [count, setCount] = useState(amount)
 
   useEffect(() => {
-    basketService.changeCountItem(id, count)
+    basketService.changeAmount({ id, count })
   }, [count])
 
   const transformLink = (link: string) => {

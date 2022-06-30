@@ -16,6 +16,7 @@ type Props = {
   classes?: string
   textBtn: string
   linkTo?: string
+  setShowToatsFn?: (trigger: boolean) => void
   price: {
     [index: string]: number
   }
@@ -37,6 +38,7 @@ const Card: React.FC<Props> = ({
   linkTo,
   price,
   oldPrice,
+  setShowToatsFn,
 }) => {
   const [actualHeft, setActualHeft] = useState<string>('250')
 
@@ -82,7 +84,12 @@ const Card: React.FC<Props> = ({
         <div className='price'>
           {price[actualHeft]} ₽{sale && <div className='oldPrice'>{oldPrice[actualHeft]} ₽</div>}
         </div>
-        <Button text={textBtn} classes='card-btn' linkTo={linkTo} />
+        <Button
+          text={textBtn}
+          classes='card-btn'
+          linkTo={linkTo}
+          fn={() => setShowToatsFn && setShowToatsFn(true)}
+        />
       </div>
       {sale && <div className='sale'>%</div>}
     </div>

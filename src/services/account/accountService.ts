@@ -1,23 +1,38 @@
 import { appService } from '../app/appService'
+import { createStore, sample } from 'effector'
+import { accountOrder } from '../../components/types'
 
-export const nextDiscount = () => {
-  const loginRes = appService.$loginResult.getState()
+const $nextDiscount = createStore(-5)
+const $allTotal = createStore(0)
 
-  const actualDiscount = loginRes && loginRes.data && loginRes.data.discount
+sample({
+  clock: [appService.fetchLoginFx.doneData, appService.fetchOrdersFx.doneData],
+  source: appService.$loginResult,
+  fn: (source) => {
+    console.log('source', source)
+    const actualDiscount = source ? source.data.discount : 0
+    console.log('actreijahuie', actualDiscount)
+    let next = 0
+    if (actualDiscount !== 20) {
+      if (actualDiscount < 15 && actualDiscount >= 10) next = 15
+      else if (actualDiscount === 15) next = 20
+      else if (actualDiscount < 10) next = 10
+    } else next = 20
+    return next
+  },
+  target: $nextDiscount,
+})
 
-  let nextDiscount
-  if (actualDiscount !== 20) {
-    if (actualDiscount! < 15 && actualDiscount! >= 10) nextDiscount = 15
-    else if (actualDiscount! === 15) nextDiscount = 20
-    else if (actualDiscount! < 10) nextDiscount = 10
-  } else nextDiscount = 20
-  return String(nextDiscount)
-}
+sample({
+  clock: [appService.fetchLoginFx.doneData, appService.fetchOrdersFx.doneData],
+  fn: (clock) => {
+    const loginRes = clock.orders ? clock.orders : clock.data.orders
+    return loginRes.reduce((total: number, next: accountOrder) => total + next.total, 0)
+  },
+  target: $allTotal,
+})
 
-export const allTotal = () => {
-  const loginRes = appService.$loginResult.getState()
-
-  return (
-    loginRes && loginRes.data && loginRes.data.orders.reduce((total, next) => total + next.total, 0)
-  )
+export const accountService = {
+  $nextDiscount,
+  $allTotal,
 }

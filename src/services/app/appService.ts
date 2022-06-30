@@ -1,7 +1,7 @@
 import { createStore, createEvent, createEffect, forward, sample, guard } from 'effector'
 import { api } from '../api'
 
-import { Account, Coffe, coffeType, Login, loginRes } from '../../components/types'
+import { Account, Coffe, Login, loginRes } from '../../components/types'
 import { ChangeEvent } from 'react'
 
 //ISLOGIN
@@ -13,12 +13,8 @@ $isLogin.on(setIsLogin, (_, payload) => payload)
 $isLogin.watch((state) => console.log('isLogin', state))
 
 //COFFES FETCH
-const initStateCoffes = {
-  length: 0,
-  data: [],
-}
-const $coffes = createStore<coffeType>(initStateCoffes)
-const $foundCoffes = createStore<coffeType>(initStateCoffes)
+const $coffes = createStore<Coffe[]>([])
+const $foundCoffes = createStore<Coffe[]>([])
 const $coffe = createStore<Coffe | null>(null)
 
 const $offset = createStore<number>(6)
@@ -35,6 +31,7 @@ const setLoading = createEvent<boolean>()
 const setOffset = createEvent<number>()
 
 $coffes.on(fetchCoffesFx.doneData, (_, payload) => payload)
+
 $coffe.on(fetchCoffeFx.doneData, (_, payload) => payload)
 
 $foundCoffes.on(fetchFoundCoffesFx.doneData, (_, payload) => payload)
@@ -86,16 +83,8 @@ $registerResult.on(fetchRegisterFx.doneData, (_, payload) => payload)
 $registerResult.watch((state) => console.log(state))
 
 $loginResult.on(fetchLoginFx.doneData, (_, payload) => payload)
-// $loginResult.on(fetchOrdersFx.doneData, (state, payload) => {
-//   const newLoginRes: loginRes = {
-//       ...state!,
-//     data: { ...state!.data!, orders: payload },
-//   }
-//   console.log(newLoginRes)
-//   return newLoginRes
-// })
 
-const notNull = <T>(payload: T): payload is Exclude<T, null> => payload !== null
+export const notNull = <T>(payload: T): payload is Exclude<T, null> => payload !== null
 
 sample({
   source: guard({
@@ -103,7 +92,10 @@ sample({
     filter: notNull,
   }),
   clock: fetchOrdersFx.doneData,
-  fn: (state, clock) => ({ ...state, data: { ...state.data, orders: clock } }),
+  fn: (state, clock) => ({
+    ...state,
+    data: { ...state.data, orders: clock.orders, discount: clock.discount },
+  }),
   target: $loginResult,
 })
 $loginResult.watch((state) => console.log(state))
@@ -128,7 +120,8 @@ async function fetchCoffes() {
   const res = await api.get(`/products-coffe`)
 
   setLoading(false)
-  return res.data
+  console.log(res.data.data)
+  return res.data.data
 }
 
 async function fetchCoffe(id: string) {
@@ -178,6 +171,8 @@ const changeCount = (e: ChangeEvent<HTMLInputElement>, setCount: (amount: number
 }
 
 export const appService = {
+  fetchOrdersFx,
+  fetchLoginFx,
   ordersEvent,
   handlerCount,
   changeCount,

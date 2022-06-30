@@ -1,8 +1,3 @@
-export type coffeType = {
-  length: number
-  data: Array<Coffe> | never[]
-}
-
 export type Coffe = {
   _id: string
   name: string

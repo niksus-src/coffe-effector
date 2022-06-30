@@ -6,17 +6,18 @@ import personalImg from '../../img/account/personalLogo.png'
 import { appService } from '../../services/app/appService'
 import { useStore } from 'effector-react'
 import { loginRes, Order, Products } from '../types'
-import { allTotal, nextDiscount } from '../../services/account/accountService'
+import { accountService } from '../../services/account/accountService'
 
 const Account = () => {
   const [isOpenSpec, setIsOpenSpec] = useState(false)
   const [isCurrentBtn, setIsCurrentBtn] = useState('current')
   const loginRes = useStore(appService.$loginResult)
+  const allTotal = useStore(accountService.$allTotal)
+  const nextDiscount = useStore(accountService.$nextDiscount)
   const history = useHistory()
 
   useEffect(() => {
     if ((loginRes && !loginRes.login) || loginRes === null) {
-      console.log('un')
       sessionStorage.setItem('isLogin', 'false')
       history.push('/account')
       appService.setIsLogin(false)
@@ -28,6 +29,7 @@ const Account = () => {
     '15': 7000,
     '20': 10000,
   }
+  console.log('alltotala', nextDiscount, allTotal)
 
   return (
     <div className='account-wrapper'>
@@ -69,11 +71,11 @@ const Account = () => {
               <div className='account-top-sale-title'>
                 Ваша скидка: {loginRes && loginRes.data && loginRes.data.discount}%
               </div>
-              <div className='account-top-sale-desc'>Сумма заказов: {allTotal()} ₽*</div>
+              <div className='account-top-sale-desc'>Сумма заказов: {allTotal} ₽*</div>
               {loginRes!.data.discount !== 20 && (
                 <div className='account-top-sale-ps'>
-                  *До скидки {nextDiscount()}% не хватает покупок на сумму:{' '}
-                  {lacksDiscount[nextDiscount()] - allTotal()!} ₽
+                  *До скидки {nextDiscount}% не хватает покупок на сумму:{' '}
+                  {lacksDiscount[nextDiscount] - allTotal} ₽
                 </div>
               )}
             </div>
@@ -82,8 +84,8 @@ const Account = () => {
             <div className='account-top-sale-specification swing-in-top-fwd'>
               {loginRes!.data.discount !== 20 && (
                 <div className='account-top-sale-specification-title'>
-                  До скидки {nextDiscount()}% не хватает покупок на сумму:
-                  {lacksDiscount[nextDiscount()] - allTotal()!} ₽
+                  До скидки {nextDiscount}% не хватает покупок на сумму:
+                  {lacksDiscount[nextDiscount] - allTotal} ₽
                 </div>
               )}
               <div className='account-top-sale-specification-desc'>

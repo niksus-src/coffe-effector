@@ -12,12 +12,10 @@ import Loader from '../loader/Loader'
 
 const CatalogCards = () => {
   const coffes = useStore(appService.$coffes)
-  const sort = useStore(serviceCatalog.$catalogSortDirection)
+  const filtereredCoffes = useStore(serviceCatalog.$filteredCoffes)
 
   const loading = useStore(appService.$isLoading)
   const offset = useStore(appService.$offset)
-
-  const filteredCoffes = serviceCatalog.filteredAndSortedCoffes(sort)
 
   useEffect(() => {
     if (coffes.length === 0) {
@@ -30,14 +28,14 @@ const CatalogCards = () => {
     <>
       <div className='catalog-cards-wrapper'>
         {loading && <Loader />}
-        {filteredCoffes.length === 0 && !loading && (
+        {filtereredCoffes.length === 0 && !loading && (
           <div className='not-found'>Ничего не найдено</div>
         )}
-        {!loading && filteredCoffes.length !== 0 && (
+        {!loading && filtereredCoffes.length !== 0 && (
           <>
             <CustomSelectSort />
             <div className='catalog-cards'>
-              {filteredCoffes.map((coffe: Coffe, i) => {
+              {filtereredCoffes.map((coffe: Coffe, i: number) => {
                 if (i >= offset) return
                 return (
                   <Card

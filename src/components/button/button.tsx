@@ -5,7 +5,7 @@ type Props = {
   text: string
   classes: string
   linkTo?: string | null
-  fn?: () => void
+  fn?: any
 }
 
 const Button: React.FC<Props> = (props) => {
