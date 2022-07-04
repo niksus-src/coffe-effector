@@ -13,7 +13,7 @@ import Loader from '../loader/Loader'
 const CatalogCards = () => {
   const coffes = useStore(appService.$coffes)
   const filtereredCoffes = useStore(serviceCatalog.$filteredCoffes)
-
+  console.log('filteredCoffes in Catalog', filtereredCoffes)
   const loading = useStore(appService.$isLoading)
   const offset = useStore(appService.$offset)
 
@@ -58,7 +58,7 @@ const CatalogCards = () => {
             </div>
             <button
               className='catalog-cards_btn'
-              disabled={loading || offset >= coffes.length}
+              disabled={loading || offset >= filtereredCoffes.length}
               onClick={() => {
                 appService.setOffset(offset + 6)
               }}

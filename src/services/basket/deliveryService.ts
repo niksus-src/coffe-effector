@@ -1,4 +1,9 @@
 import { createForm, Rule } from 'effector-forms'
+import { createEffect, createEvent, createStore, guard, sample } from 'effector'
+import { api } from '../api'
+import { forward } from 'effector/effector.umd'
+import { basketService } from './basketService'
+import { notNullArray } from '../app/appService'
 
 const rules = {
   required: (): Rule<string> => ({
@@ -44,7 +49,7 @@ const rules = {
   }),
 }
 
-const deliveryForm = createForm({
+export const deliveryForm = createForm({
   fields: {
     name: {
       init: '',
@@ -88,4 +93,48 @@ const deliveryForm = createForm({
   validateOn: ['submit'],
 })
 
-export default deliveryForm
+export const $price = createStore(0)
+type kek = {
+  postcode: string
+  heft: number
+  price: number
+}
+const getPriceEvent = createEvent<kek>()
+export const triggerFetchEvent = createEvent()
+const fetchPriceDelFx = createEffect({ handler: getPriceDel })
+
+$price.on(fetchPriceDelFx.doneData, (_, payload) => payload)
+$price.on(basketService.delAllItem, () => 0)
+
+sample({
+  source: guard({
+    source: [deliveryForm.$values, basketService.$basket],
+    filter: notNullArray,
+  }),
+  fn: (source) => {
+    const fields = source[0]
+    const basket = source[1] ? source[1] : []
+    const postcode = fields.postcode
+    const heft = basket.reduce((totalHeft, next) => totalHeft + +next.heft, 0)
+    const price = basket.reduce((totalPrice, next) => totalPrice + +next.price * next.amount, 0)
+    console.log(postcode, heft, price, basket)
+    return { postcode, heft, price }
+  },
+  target: getPriceEvent,
+})
+
+forward({
+  from: getPriceEvent,
+  to: fetchPriceDelFx,
+})
+fetchPriceDelFx.watch((data) => console.log(data))
+
+//Async
+
+async function getPriceDel(data: kek) {
+  if (data.postcode.length === 6 && data.heft !== 0) {
+    const res = await api.get(`/accounts/getPriceDel/${data.postcode}&${data.heft}&${data.price}`)
+    console.log(res.data)
+    return res.data
+  } else return 0
+}

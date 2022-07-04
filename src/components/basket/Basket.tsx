@@ -2,7 +2,7 @@ import './basket.scss'
 
 import { Link } from 'react-router-dom'
 import BasketElem from './BasketItem'
-import deliveryForm from '../../services/basket/deliveryService'
+import { deliveryForm, $price, triggerFetchEvent } from '../../services/basket/deliveryService'
 import { useForm } from 'effector-forms'
 import { basketService } from '../../services/basket/basketService'
 
@@ -13,12 +13,36 @@ import { appService } from '../../services/app/appService'
 import Popup from '../popup/popup'
 import { useState } from 'react'
 
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const Basket = () => {
   const { fields, hasError, errorText, submit } = useForm(deliveryForm)
   const [showPopup, setShowPopup] = useState(false)
   const basket = useStore(basketService.$basket)
   const login = useStore(appService.$loginResult)
   const allTotal = useStore(basketService.$allTotal)
+  const priceDelivery = useStore($price)
+
+  const notifySuccess = () =>
+    toast.success('Заказ успешно оформлен', {
+      position: 'bottom-right',
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
+  const notifyErrorDel = () =>
+    toast.error('Укажите данные для доставки', {
+      position: 'bottom-right',
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
 
   const renderItems = () => {
     if (basket !== null)
@@ -49,6 +73,17 @@ const Basket = () => {
 
   return (
     <div className='basket-wrapper'>
+      <ToastContainer
+        position='bottom-right'
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className='basket'>
         <div className='basket-links'>
           <Link to='/'>Главная</Link>
@@ -94,7 +129,10 @@ const Basket = () => {
         </div>
 
         <div className='block-wrapper delivery'>
-          <div className='delivery-title'>Доставка</div>
+          <div className='delivery-top'>
+            <div className='delivery-top-title'>Доставка</div>
+            <div className='delivery-top-price'>{priceDelivery} ₽</div>
+          </div>
           <form className='delivery-form'>
             <div className='delivery-form-inputs'>
               <div className='delivery-form-inputs-item'>
@@ -180,7 +218,6 @@ const Basket = () => {
                   <div className='delivery-form-inputs-error'>{errorText('streetHome')}</div>
                 )}
               </div>
-
               <div className='delivery-form-inputs-item'>
                 <input
                   type='text'
@@ -233,6 +270,9 @@ const Basket = () => {
               onClick={(e) => {
                 e.preventDefault()
                 submit()
+                if (!hasError()) {
+                  triggerFetchEvent()
+                }
               }}
             />
           </form>
@@ -247,13 +287,22 @@ const Basket = () => {
               распространяется на доставку
             </div>
             <input type='text' placeholder='Промокод' className='basket-footer-promo-input' />
-            <button className='basket-footer-promo-btn'>Ввести промокод</button>
+            <button className='basket-footer-promo-btn' onClick={notifySuccess}>
+              Ввести промокод
+            </button>
           </div>
           <div className='block-wrapper basket-footer-payment'>
             <div className='basket-footer-payment-title'>
               <div className='basket-footer-payment-title-text'>
                 Итог:
-                {allTotal - allTotal * (login ? login.data.discount / 100 : 0)}₽
+                <span>
+                  {(
+                    allTotal -
+                    allTotal * (login ? login.data.discount / 100 : 0) +
+                    priceDelivery
+                  ).toFixed(2)}
+                  ₽
+                </span>
               </div>
               <div className='basket-footer-payment-title-img'>
                 <img src={masterCard} alt='masterCard' />
@@ -262,21 +311,30 @@ const Basket = () => {
             </div>
             <div className='basket-footer-payment-desc'>
               Подытог: {allTotal} ₽ <br /> Скидка:
-              {allTotal * (login ? login.data.discount / 100 : 0)} ₽ (
-              {login ? login.data.discount : '0'}%)
+              <span>
+                {allTotal * (login ? login.data.discount / 100 : 0)} ₽ (
+                {login ? login.data.discount : '0'}%)
+              </span>
+              <br />
+              Доставка: {priceDelivery} ₽
             </div>
             <button
               className='basket-footer-payment-btn'
               onClick={() => {
-                if (!login) setShowPopup(true)
-                else {
-                  basketService.addOrderEvent({
-                    id: login.id,
-                    basket,
-                    discount: login.data.discount,
-                  })
-                  basketService.delAllItem()
-                }
+                submit()
+                if (!hasError()) {
+                  if (!login) setShowPopup(true)
+                  else {
+                    basketService.addOrderEvent({
+                      id: login.id,
+                      basket,
+                      discount: login.data.discount,
+                    })
+                    basketService.delAllItem()
+                    triggerFetchEvent()
+                    notifySuccess()
+                  }
+                } else notifyErrorDel()
               }}
             >
               Оплатить заказ

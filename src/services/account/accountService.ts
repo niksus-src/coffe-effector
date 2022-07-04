@@ -9,9 +9,7 @@ sample({
   clock: [appService.fetchLoginFx.doneData, appService.fetchOrdersFx.doneData],
   source: appService.$loginResult,
   fn: (source) => {
-    console.log('source', source)
     const actualDiscount = source ? source.data.discount : 0
-    console.log('actreijahuie', actualDiscount)
     let next = 0
     if (actualDiscount !== 20) {
       if (actualDiscount < 15 && actualDiscount >= 10) next = 15

@@ -9,7 +9,9 @@ import { appService } from '../../services/app/appService'
 import { useStore } from 'effector-react'
 import { basketService } from '../../services/basket/basketService'
 import { renderFeature, renderGrain } from '../../services/rendersElements'
-import Toats from '../toats/toats'
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 type Params = {
   id: string
@@ -36,12 +38,29 @@ const ItemCoffe = () => {
 
   const actualPrice = coffe?.price[actualHeft] ? coffe?.price[actualHeft]! * count : '0'
 
+  const notifySuccess = () =>
+    toast.success('Товар успешно добавлен в корзину', {
+      position: 'bottom-right',
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   return (
     <>
-      {showToats && (
-        <Toats desc='Товар успешно добавлен в корзину' show={showToats} setShow={setShowToats} />
-      )}
-
+      <ToastContainer
+        position='bottom-right'
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {!coffe ? (
         <div className='item not-found'>Ничего не найдено</div>
       ) : (
@@ -124,6 +143,7 @@ const ItemCoffe = () => {
                     text={`Купить за ${actualPrice} ₽`}
                     classes='buy-btn'
                     fn={() => {
+                      notifySuccess()
                       basketService.insertItem({ coffe, count, actualHeft })
                       setShowToats(true)
                     }}

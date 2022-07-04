@@ -84,7 +84,17 @@ $registerResult.watch((state) => console.log(state))
 
 $loginResult.on(fetchLoginFx.doneData, (_, payload) => payload)
 
-export const notNull = <T>(payload: T): payload is Exclude<T, null> => payload !== null
+type InferArrayType<T> = T extends Array<infer R> ? R : any
+
+type NonNullable<T> = Exclude<T, null>
+
+export function notNull<T>(value: T): value is NonNullable<T> {
+  return value !== null
+}
+
+export function notNullArray<T>(value: Array<T>): value is Array<NonNullable<T>> {
+  return value.every(notNull)
+}
 
 sample({
   source: guard({

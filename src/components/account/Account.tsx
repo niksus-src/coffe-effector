@@ -29,7 +29,6 @@ const Account = () => {
     '15': 7000,
     '20': 10000,
   }
-  console.log('alltotala', nextDiscount, allTotal)
 
   return (
     <div className='account-wrapper'>
